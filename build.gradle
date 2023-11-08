@@ -69,6 +69,9 @@ dependencies {
 	testImplementation("org.junit.vintage:junit-vintage-engine") {
 		exclude group: "org.hamcrest", module: "hamcrest-core"
 	}
+
+	implementation "ca.pjer:logback-awslogs-appender:1.6.0"
+
 }
 
 tasks.named('test') {
