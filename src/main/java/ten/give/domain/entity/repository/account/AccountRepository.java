@@ -18,5 +18,4 @@ public interface AccountRepository {
     List<Account> findAll();
 
     Optional<Account> findAccountByEmail(String email);
-
 }

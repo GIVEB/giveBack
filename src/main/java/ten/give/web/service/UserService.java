@@ -32,15 +32,19 @@ public class UserService {
 
     public ResultForm joinUser(JoinForm form) {
 
-        if (!emailCheck(form)){
-            return new ResultForm(false,"이미 가입된 email 입니다.");
+        if (!emailCheck(form.getEmail())) {
+            return new ResultForm(false, "이미 가입된 email 입니다.");
         }
 
-        if(!buildAccountAndUser(form)){
+        if (!phoneCheck(form.getPhone())) {
+            return new ResultForm(false, "이미 등록 된 전화 번호 입니다.");
+        }
+
+        if (!buildAccountAndUser(form)) {
             throw new IllegalStateException("가입 중 오류가 발생 했습니다.");
         }
 
-        return  new ResultForm(true, "가입 완료.");
+        return new ResultForm(true, "가입 완료.");
 
     }
 
@@ -99,9 +103,18 @@ public class UserService {
         return (savedUser != null) && (savedAccount != null);
     }
 
-    private boolean emailCheck(JoinForm form) {
-        Optional<Account> accountByEmail = accountRepository.findAccountByEmail(form.getEmail());
+    private boolean emailCheck(String email) {
+        Optional<Account> accountByEmail = accountRepository.findAccountByEmail(email);
         if (accountByEmail.isEmpty()){
+            return true;
+        }
+
+        return false;
+    }
+
+    private boolean phoneCheck(String phone) {
+        Optional<Account> accountByPhone = userRepository.findAccountByPhone(phone);
+        if (accountByPhone.isEmpty()){
             return true;
         }
 

@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import ten.give.domain.entity.user.Account;
 import ten.give.domain.entity.user.User;
 import ten.give.web.form.UserInfoForm;
 import java.util.List;
@@ -81,6 +82,11 @@ public class UserRepositoryImplements implements UserRepository {
     @Override
     public User findUserByNameAndPhoneNumber(String name, String phoneNumber) {
         return jpaRepository.findUserByNameAndPhoneNumber(name,phoneNumber);
+    }
+
+    @Override
+    public Optional<Account> findAccountByPhone(String phone) {
+        return jpaRepository.findUserByPhoneNumber(phone);
     }
 
 

@@ -1,5 +1,6 @@
 package ten.give.domain.entity.repository.user;
 
+import ten.give.domain.entity.user.Account;
 import ten.give.domain.entity.user.User;
 import ten.give.web.form.UserInfoForm;
 
@@ -27,4 +28,6 @@ public interface UserRepository {
     Long getTotalDonationCount();
 
     User findUserByNameAndPhoneNumber(String name, String phoneNumber);
+
+    Optional<Account> findAccountByPhone(String phone);
 }

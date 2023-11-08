@@ -51,4 +51,5 @@ public class AccountRepositoryImplements implements AccountRepository{
     public Optional<Account> findAccountByEmail(String email) {
         return jpaRepository.findAccountByEmail(email);
     }
+
 }
