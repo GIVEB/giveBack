@@ -7,10 +7,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ten.give.domain.entity.user.Follow;
 import ten.give.domain.exception.form.ResultForm;
 import ten.give.web.service.FollowService;
@@ -100,7 +97,7 @@ public class FollowController {
                     )
             }
     )
-    @PostMapping("/followings")
+    @GetMapping("/followings")
     public List<Follow> followings(Authentication authentication){
         return followService.getFollowing(Long.valueOf(authentication.getName()));
     }
@@ -121,7 +118,7 @@ public class FollowController {
                     )
             }
     )
-    @PostMapping("/followers")
+    @GetMapping("/followers")
     public List<Follow> Followers(Authentication authentication){
         return followService.getFollower(Long.valueOf(authentication.getName()));
     }
