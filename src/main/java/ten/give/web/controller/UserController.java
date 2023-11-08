@@ -281,9 +281,9 @@ public class UserController {
             }
     )
     @PostMapping("/editpassword")
-    public ResultForm editPassword(@RequestBody String password, Authentication authentication){
-        log.info("password : {} ",password);
-        return userService.editPassword(Long.valueOf(authentication.getName()),password);
+    public ResultForm editPassword(@RequestBody PasswordEditForm editPassword, Authentication authentication){
+        log.info("password : {} ",editPassword.getEditPassword());
+        return userService.editPassword(Long.valueOf(authentication.getName()),editPassword.getEditPassword());
     }
 
 
