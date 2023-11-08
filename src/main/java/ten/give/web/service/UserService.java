@@ -33,7 +33,7 @@ public class UserService {
     public ResultForm joinUser(JoinForm form) {
 
         if (!emailCheck(form)){
-            return new ResultForm(false,"이미 회원가입 되어 있습니다.");
+            return new ResultForm(false,"이미 가입된 email 입니다.");
         }
 
         if(!buildAccountAndUser(form)){
