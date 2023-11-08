@@ -29,5 +29,5 @@ public interface UserRepository {
 
     User findUserByNameAndPhoneNumber(String name, String phoneNumber);
 
-    Optional<Account> findAccountByPhone(String phone);
+    Optional<User> findAccountByPhone(String phone);
 }

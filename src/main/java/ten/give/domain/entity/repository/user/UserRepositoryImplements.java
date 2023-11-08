@@ -85,7 +85,7 @@ public class UserRepositoryImplements implements UserRepository {
     }
 
     @Override
-    public Optional<Account> findAccountByPhone(String phone) {
+    public Optional<User> findAccountByPhone(String phone) {
         return jpaRepository.findUserByPhoneNumber(phone);
     }
 

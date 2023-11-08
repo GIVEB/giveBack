@@ -113,7 +113,7 @@ public class UserService {
     }
 
     private boolean phoneCheck(String phone) {
-        Optional<Account> accountByPhone = userRepository.findAccountByPhone(phone);
+        Optional<User> accountByPhone = userRepository.findAccountByPhone(phone);
         if (accountByPhone.isEmpty()){
             return true;
         }
