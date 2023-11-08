@@ -44,6 +44,4 @@ jobs:
             docker pull shinywoon/spring-cicd:${GITHUB_SHA::7}
             docker tag shinywoon/spring-cicd:${GITHUB_SHA::7} spring-cicd
             docker stop server
-            docker pull mysql
-            docker run --name mysql-container -e MYSQL_ROOT_PASSWORD=1234 -d -p 3306:3306 -dit --restart unless-stopped mysql
             docker run -d --rm --name server -p 80:8080 spring-cicd
