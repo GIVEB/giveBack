@@ -87,7 +87,7 @@ public class DonorCardController {
                             value = "로그인 유저 Token",
                             required = true,
                             dataType = "Authentication",
-                            paramType = "Header",
+                            paramType = "body",
                             defaultValue = "None"
                     )
             }

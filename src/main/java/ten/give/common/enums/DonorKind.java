@@ -1,12 +1,6 @@
 package ten.give.common.enums;
 
-/**
- * @version 0.0
- * @Author shinywoon
- * Donation Blood Kind
- * if Client input Number 0 to 3,
- * We Change String for to input donation blood Kind.
- */
+
 
 public enum DonorKind {
 

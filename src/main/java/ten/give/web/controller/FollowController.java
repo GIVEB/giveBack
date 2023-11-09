@@ -35,7 +35,7 @@ public class FollowController {
                             value = "Follow 할 ID",
                             required = true,
                             dataType = "Authentication",
-                            paramType = "head",
+                            paramType = "body",
                             defaultValue = "None"
                     ),
                     @ApiImplicitParam(
@@ -65,7 +65,7 @@ public class FollowController {
                             value = "로그인 사용자 Token",
                             required = true,
                             dataType = "Authentication",
-                            paramType = "head",
+                            paramType = "body",
                             defaultValue = "None"
                     ),
                     @ApiImplicitParam(
@@ -94,7 +94,7 @@ public class FollowController {
                             value = "로그인 사용자 정보",
                             required = true,
                             dataType = "Authentication",
-                            paramType = "head",
+                            paramType = "body",
                             defaultValue = "None"
                     )
             }

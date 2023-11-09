@@ -109,7 +109,7 @@ public class UserController {
                             value = "로그인 회원 정보",
                             required = true,
                             dataType = "Authentication",
-                            paramType = "header",
+                            paramType = "body",
                             defaultValue = "None"
                     )
             }
@@ -134,7 +134,7 @@ public class UserController {
                             value = "로그인 회원 정보",
                             required = true,
                             dataType = "Authentication",
-                            paramType = "header",
+                            paramType = "body",
                             defaultValue = "None"
                     )
             }
@@ -173,7 +173,7 @@ public class UserController {
                             value = "로그인 회원 정보",
                             required = true,
                             dataType = "Authentication",
-                            paramType = "header",
+                            paramType = "body",
                             defaultValue = "None"
                     ),
                     @ApiImplicitParam(

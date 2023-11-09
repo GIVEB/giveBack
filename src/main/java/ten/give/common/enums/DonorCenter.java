@@ -1,12 +1,6 @@
 package ten.give.common.enums;
 
-/**
- * @version 0.0
- * @Author shinywoon
- * Blood Center name
- * if Client input Number 0 to 4,
- * We Change String for to input blood center.
- */
+
 
 public enum DonorCenter {
 

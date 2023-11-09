@@ -1,12 +1,6 @@
 package ten.give.common.enums;
 
-/**
- * @version 0.0
- * @Author shinywoon
- * Donation Blood Kind
- * if Client input MALE or FEMALE,
- * We Change character M,F
- */
+
 
 public enum Gender {
 

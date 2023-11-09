@@ -27,7 +27,7 @@ public class DonorCardInfoForm {
     private LocalDate birth;
     @ApiModelProperty(value="헌혈자 이름", example = "양지웅", required = true)
     private String name;
-    @ApiModelProperty(value="성별 [MALE,FEMALE]", example = "M", required = true)
+    @ApiModelProperty(value="성별 ", example = "M", required = true)
     private Gender gender;
     @ApiModelProperty(value="헌혈 날짜 [년-월-일]", example = "2023-09-01", required = true)
     private LocalDate donorDate;
