@@ -3,6 +3,7 @@ package ten.give.web.controller;
 import io.swagger.annotations.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import ten.give.domain.exception.form.ResultForm;
@@ -22,6 +23,9 @@ import java.util.Map;
 @Api(tags = "DonorCardController")
 public class DonorCardController {
 
+    @Value("${admin.id}")
+    private Long admin;
+
     private final DonorCardService cardService;
 
     @ApiOperation(
@@ -35,7 +39,7 @@ public class DonorCardController {
     @GetMapping
     public Object getList(Authentication authentication){
         // 관리자 권한인 2L 이 아니면 , 수정 필요
-        if (Long.valueOf(authentication.getName()) != 2L){
+        if (Long.valueOf(authentication.getName()) != admin){
             return new ResultForm(false,"허용되지 않은 접근입니다 [getList]");
         }
         Map<String,List<DonorCardInfoForm>> result = cardService.getCardList();
