@@ -16,10 +16,10 @@ import java.util.List;
 import java.util.Map;
 
 @Slf4j
-@Api(tags = "DonorCardController")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/donorcards")
+@Api(tags = "DonorCardController")
 public class DonorCardController {
 
     private final DonorCardService cardService;
@@ -33,7 +33,6 @@ public class DonorCardController {
     })
     @GetMapping
     public Map<String,List<DonorCardInfoForm>> getList(){
-        log.info("client in here!");
         Map<String,List<DonorCardInfoForm>> result = cardService.getCardList();
         return result;
     }

@@ -12,7 +12,9 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import ten.give.web.service.LoginService;
 
-// security 를 적용하면 spring 은 default 로 모든 API 에 인증이 필요한 것으로 설정함
+/**
+ * security 를 적용하면 spring 은 default 로 모든 API 에 인증이 필요한 것으로 설정한다.
+ */
 
 @Configuration
 @EnableWebSecurity
@@ -21,6 +23,9 @@ public class AuthenticationConfig {
 
     private final LoginService loginService;
 
+    /**
+     * properties 내 설정
+     */
     @Value("${jwt.secret}")
     private String secretKey;
 

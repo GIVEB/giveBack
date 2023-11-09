@@ -1,5 +1,12 @@
 package ten.give.common.enums;
 
+/**
+ * @version 0.0
+ * @Author shinywoon
+ * User's Grade
+ * @deprecated we will update user's Grade Policy
+ */
+
 public enum Grade {
 
     PAPERCUP("papercup"),

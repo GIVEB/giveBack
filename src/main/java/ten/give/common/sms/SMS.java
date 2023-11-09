@@ -8,8 +8,12 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-
-// 미사용
+/**
+ * @version 0.0
+ * @Author shinywoon
+ * class for SMS sending
+ * @deprecated billing problem
+ */
 
 public class SMS {
 

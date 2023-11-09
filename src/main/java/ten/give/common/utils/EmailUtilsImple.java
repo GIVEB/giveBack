@@ -18,7 +18,6 @@ import java.time.LocalDateTime;
 public class EmailUtilsImple implements EmailUtils{
 
     private final JavaMailSender sender;
-
     private static final String suffixTitle = "님 본인 인증 Mail 입니다.";
     private static final String midBody = "님 의 인증 문자는 [ ";
     private static final String suffixBody = " ] 입니다. 입력창에 입력해 주세요";
