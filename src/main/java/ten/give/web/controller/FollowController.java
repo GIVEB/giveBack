@@ -26,7 +26,8 @@ public class FollowController {
     @ApiOperation(
             value = "Follow",
             notes = "Follow 하기 <br>" +
-                    "[ EX ] URL : http://localhost:8080/follow/{toId}")
+                    "타인을 Follow 합니다." +
+                    "[ EX ] URL : http://localhost:8080/follow/3")
     @ApiImplicitParams(
             value = {
                     @ApiImplicitParam(
@@ -34,15 +35,15 @@ public class FollowController {
                             value = "Follow 할 ID",
                             required = true,
                             dataType = "Authentication",
-                            paramType = "body",
+                            paramType = "head",
                             defaultValue = "None"
                     ),
                     @ApiImplicitParam(
                             name = "toId",
                             value = "Follow 할 ID",
                             required = true,
-                            dataType = "String",
-                            paramType = "body",
+                            dataType = "Long",
+                            paramType = "path",
                             defaultValue = "None"
                     )
             }
@@ -55,23 +56,24 @@ public class FollowController {
     @ApiOperation(
             value = "unFollow",
             notes = "unFollow 하기 <br>" +
-                    "[ EX ] URL : http://localhost:8080/unfollow/{toId}")
+                    "타인은 unFollow 합니다." +
+                    "[ EX ] URL : http://localhost:8080/unfollow/3")
     @ApiImplicitParams(
             value = {
                     @ApiImplicitParam(
                             name = "authentication",
-                            value = "Follow 할 ID",
+                            value = "로그인 사용자 Token",
                             required = true,
                             dataType = "Authentication",
-                            paramType = "body",
+                            paramType = "head",
                             defaultValue = "None"
                     ),
                     @ApiImplicitParam(
                             name = "toId",
-                            value = "Follow 할 ID",
+                            value = "unFollow 할 ID",
                             required = true,
-                            dataType = "String",
-                            paramType = "body",
+                            dataType = "Long",
+                            paramType = "path",
                             defaultValue = "None"
                     )
             }
@@ -83,16 +85,16 @@ public class FollowController {
 
     @ApiOperation(
             value = "show Following",
-            notes = "Following 인원 보기 <br>" +
+            notes = "Following 목록 보기 <br>" +
                     "[ EX ] URL : http://localhost:8080/followings")
     @ApiImplicitParams(
             value = {
                     @ApiImplicitParam(
                             name = "authentication",
-                            value = "로그인 ID",
+                            value = "로그인 사용자 정보",
                             required = true,
                             dataType = "Authentication",
-                            paramType = "body",
+                            paramType = "head",
                             defaultValue = "None"
                     )
             }
