@@ -43,13 +43,13 @@ public class DonorCardController {
     }
 
     @ApiOperation(
-            value = "card_id로 DonorCard 단일 조회하기",
-            notes = "card_id로 Donor Card 조회하기<br>" +
-                    "[ EX ] URL : http://localhost:8080/donorcards/2<br>" +
-                    "1 : red box 2 ~ : user_id")
+            value = "card_id 로 헌혈증 단일 조회하기",
+            notes = "card_id로 헌혈증 단일 조회하기<br>" +
+                    "[ EX ] URL : http://localhost:8080/donorcards/2 <br>" +
+                    "1 : red box 2 ~ : user_id " )
     @ApiImplicitParam(
             name = "cardId",
-            value = "카드 번호",
+            value = "카드 Generate 번호",
             required = true,
             dataType = "Long",
             paramType = "path",
@@ -65,16 +65,28 @@ public class DonorCardController {
     }
 
     @ApiOperation(
-            value = "DonorCard 등록하기",
-            notes = "Donor Card 정보 등록하기<br>" +
+            value = "헌혈증 등록하기",
+            notes = "헌혈증 정보 등록하기 <br>" +
                     "[ EX ] URL : http://localhost:8080/donorcards")
-    @ApiImplicitParam(
-            name = "form",
-            value = "donor card 정보",
-            required = true,
-            dataType = "DonorAddForm",
-            paramType = "body",
-            defaultValue = "None"
+    @ApiImplicitParams(
+            value = {
+                    @ApiImplicitParam(
+                            name = "DonorCardform",
+                            value = "헌혈증 등록 정보",
+                            required = true,
+                            dataType = "DonorAddForm",
+                            paramType = "body",
+                            defaultValue = "None"
+                    ),
+                    @ApiImplicitParam(
+                            name = "Authentication",
+                            value = "로그인 유저 Token",
+                            required = true,
+                            dataType = "Authentication",
+                            paramType = "Header",
+                            defaultValue = "None"
+                    )
+            }
     )
     @ApiResponses({
             @ApiResponse(code=200, message="성공")
@@ -85,12 +97,12 @@ public class DonorCardController {
     }
 
     @ApiOperation(
-            value = "DonorCard 삭제하기",
-            notes = "card_id로 Donor Card 삭제하기<br>" +
-                    "[ EX ] URL : http://localhost:8080/donorcards/2")
+                value = "헌혈증 삭제하기",
+            notes = "card_id 로 헌혈증 삭제하기<br>" +
+                    " [ EX ] URL : http://localhost:8080/donorcards/2 ")
     @ApiImplicitParam(
             name = "card_id",
-            value = "card id",
+            value = "헌혈증 ID",
             required = true,
             dataType = "Long",
             paramType = "path",
@@ -105,22 +117,22 @@ public class DonorCardController {
     }
 
     @ApiOperation(
-            value = "DonorCard 정보 수정하기",
-            notes = "Donor Card 정보 수정하기<br>" +
+            value = "헌혈증 정보 수정하기",
+            notes = "헌혈증 정보 수정하기<br>" +
                     "[ EX ] URL : http://localhost:8080/donorcards/3")
     @ApiImplicitParams(
             value = {
                 @ApiImplicitParam(
                         name = "cardId",
-                        value = "card Id",
+                        value = "헌혈증 ID",
                         required = true,
                         dataType = "Long",
                         paramType = "path",
                         defaultValue = "None"
                 ),
                     @ApiImplicitParam(
-                            name = "form",
-                            value = "donor update Parameter",
+                            name = "DonorUpdateForm",
+                            value = "헌혈증 수정 form",
                             required = true,
                             dataType = "DonorUpdateForm",
                             paramType = "body",
@@ -138,8 +150,8 @@ public class DonorCardController {
     }
 
     @ApiOperation(
-            value = "DonorCard 수량 보기",
-            notes = "user_id [소유자 ID] 로 Donor Card 수량하기<br>" +
+            value = "헌혈증 수량 보기",
+            notes = " '소유자 ID' 로 헌혈증 수량보기<br>" +
                     "[ EX ] URL : http://localhost:8080/donorcards/count/3")
     @ApiImplicitParam(
             name = "user_id",
@@ -164,16 +176,28 @@ public class DonorCardController {
     }
 
     @ApiOperation(
-            value = "user_id로 DonorCard list 보기",
-            notes = "user_id [소유자 ID] 로 Donor Card list 보기<br>" +
+            value = " 헌혈증 목록 보기 [ 소유자 ID 이용 / 관리자 권한 ]",
+            notes = " '소유자 ID' 헌혈증 목록 보기<br>" +
                     "[ EX ] URL : http://localhost:8080/donorcards/list/3")
-    @ApiImplicitParam(
-            name = "user_id",
-            value = "소유자 id",
-            required = true,
-            dataType = "Long",
-            paramType = "path",
-            defaultValue = "None"
+    @ApiImplicitParams(
+            value = {
+                    @ApiImplicitParam(
+                            name = "user_id",
+                            value = "소유자 id",
+                            required = true,
+                            dataType = "Long",
+                            paramType = "path",
+                            defaultValue = "None"
+                    ),
+                    @ApiImplicitParam(
+                            name = "authentication",
+                            value = "로그인 유저 Token",
+                            required = true,
+                            dataType = "Authentication",
+                            paramType = "path",
+                            defaultValue = "None"
+                    )
+            }
     )
     @ApiResponses({
             @ApiResponse(code=200, message="성공")
@@ -190,14 +214,14 @@ public class DonorCardController {
     }
 
     @ApiOperation(
-            value = "로그인 한 user_id로 DonorCard list 보기",
-            notes = "user_id [ 로그인 ID ] 로 Donor Card list 보기<br>" +
+            value = " 로그인 사용자 헌혈증 목록 보기 [ 사용자 권한 ]",
+            notes = "로그인 사용자 헌혈증 목록 보기<br>" +
                     "[ EX ] URL : http://localhost:8080/donorcards/list")
     @ApiImplicitParam(
             name = "authentication",
-            value = "authentication : 로그인 유저",
+            value = "로그인 유저 Token",
             required = true,
-            dataType = "Long",
+            dataType = "Authentication",
             defaultValue = "None"
     )
     @ApiResponses({
