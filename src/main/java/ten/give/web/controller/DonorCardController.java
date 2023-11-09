@@ -25,14 +25,19 @@ public class DonorCardController {
     private final DonorCardService cardService;
 
     @ApiOperation(
-            value = "DonorCard List 조회하기",
-            notes = "모든 Donor Card 조회하기<br>" +
-                    "[ EX ] URL : http://localhost:8080/donorcards")
+            value = "다중 헌혈증 조회하기",
+            notes = "모든 헌혈증 조회하기 <br>" +
+                    "권한 : Admin Only <br>" +
+                    "[ Ex ] URL : http://localhost:8080/donorcards")
     @ApiResponses({
             @ApiResponse(code=200, message="성공")
     })
     @GetMapping
-    public Map<String,List<DonorCardInfoForm>> getList(){
+    public Object getList(Authentication authentication){
+        // 관리자 권한인 2L 이 아니면 , 수정 필요
+        if (Long.valueOf(authentication.getName()) != 2L){
+            return new ResultForm(false,"허용되지 않은 접근입니다 [getList]");
+        }
         Map<String,List<DonorCardInfoForm>> result = cardService.getCardList();
         return result;
     }
