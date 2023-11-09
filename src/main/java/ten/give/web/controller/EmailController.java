@@ -8,8 +8,6 @@ import ten.give.web.form.EmailResultForm;
 import ten.give.web.form.SendEmailForm;
 import ten.give.web.service.EmailService;
 
-import java.util.Map;
-
 @Slf4j
 @RequiredArgsConstructor
 @RestController

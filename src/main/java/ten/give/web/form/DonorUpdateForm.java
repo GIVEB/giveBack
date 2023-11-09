@@ -11,9 +11,9 @@ import ten.give.common.enums.Gender;
 
 import java.time.LocalDate;
 
-@ApiModel(value = "Donor Card 수정 form")
 @Data
 @Builder
+@ApiModel(value = "Donor Card 수정 form")
 public class DonorUpdateForm {
 
     @ApiModelProperty(value = "헌혈자 이름", required = true, example = "양지웅")
@@ -40,6 +40,7 @@ public class DonorUpdateForm {
     private Long userId;
 
     public DonorUpdateForm() {
+
     }
 
     public DonorUpdateForm(String name, DonorKind kind, LocalDate birth, Gender gender, LocalDate donorDate, DonorCenter donorCenter, Long userId) {

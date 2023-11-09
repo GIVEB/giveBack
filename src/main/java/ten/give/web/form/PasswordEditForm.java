@@ -8,7 +8,7 @@ import lombok.Data;
 @ApiModel(value = "Password Edit form")
 public class PasswordEditForm {
 
-    @ApiModelProperty(value = "password", required = true, example = "123dfasdf")
+    @ApiModelProperty(value = "변경 할 비밀번호", required = true, example = "123dfasdf")
     private String editPassword;
 
 }
