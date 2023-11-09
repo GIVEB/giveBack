@@ -41,8 +41,8 @@ jobs:
           key: ${{ secrets.PRIVATE_KEY }}
           envs: GITHUB_SHA
           script: |
-            docker pull shinywoon/spring-cicd:${GITHUB_SHA::7}
-            docker tag shinywoon/spring-cicd:${GITHUB_SHA::7} spring-cicd
             docker stop give
             docker rm give
+            docker pull shinywoon/spring-cicd:${GITHUB_SHA::7}
+            docker tag shinywoon/spring-cicd:${GITHUB_SHA::7} spring-cicd
             docker run -d --name give --rm -p 80:8080 spring-cicd
