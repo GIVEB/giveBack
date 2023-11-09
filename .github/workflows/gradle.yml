@@ -43,5 +43,5 @@ jobs:
           script: |
             docker pull shinywoon/spring-cicd:${GITHUB_SHA::7}
             docker tag shinywoon/spring-cicd:${GITHUB_SHA::7} spring-cicd
-            docker stop server
-            docker run -d --rm --name give -p 80:8080 spring-cicd
+            docker stop give
+            docker run -d --name give --rm -p 80:8080 spring-cicd
