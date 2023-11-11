@@ -1,7 +1,5 @@
 package ten.give.common.enums;
 
-
-
 public enum DonorKind {
 
     WHOLE(0),
