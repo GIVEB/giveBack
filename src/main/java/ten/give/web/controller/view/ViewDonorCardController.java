@@ -39,7 +39,7 @@ public class ViewDonorCardController {
 
         model.addAttribute("cardList",cardService.getCardList());
 
-        return "cardList";
+        return "cards";
     }
 
     @ApiOperation(
