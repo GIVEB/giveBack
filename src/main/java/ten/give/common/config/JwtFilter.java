@@ -29,14 +29,21 @@ public class JwtFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
-        //request Header 에서 AUTHORIZATION 꺼내기
 
+            if(request.getRequestURI().equals("")){
+                if(request.getRequestURI().substring(1,5).equals("view")){
+                    filterChain.doFilter(request,response);
+                    return;
+                }
+            }
+
+
+            //request Header 에서 AUTHORIZATION 꺼내기
             final String authorization = request.getHeader(HttpHeaders.AUTHORIZATION);
-            log.info("authorization : {}" , authorization);
 
             // authorization 이 없거나 토큰 앞단에 특정 단어가 없다면 통과 X
             if (authorization == null || !authorization.startsWith("Bearer ")){
-                log.error("authorization 을 잘못 보냈습니다.");
+                log.error("authorization null or no pre word.");
                 filterChain.doFilter(request,response);
                 return;
             }
