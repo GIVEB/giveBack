@@ -53,28 +53,19 @@ public class ViewUserController {
         return "redirect:/";
     }
 
-    @ApiOperation(
-            value = "Join",
-            notes = "회원 가입" +
-                    "[ EX ] URL : http://localhost:8080/users/join")
-    @ApiImplicitParams(
-            value = {
-                    @ApiImplicitParam(
-                            name = "JoinForm",
-                            value = "회원 가입 form : email; name; password; birthYear; birthMonth; birthDay; phone; <br>" +
-                                    "address; addressDetail; gender;",
-                            required = true,
-                            dataType = "JoinForm",
-                            paramType = "body",
-                            defaultValue = "None"
-                    )
-            }
-    )
-    @ApiResponses({
-            @ApiResponse(code=200, message="성공"),
-    })
+    @GetMapping("/join1")
+    public String joinForm1(@ModelAttribute JoinForm form){
+        return "joinForm1";
+    }
+
+    @GetMapping("/join2")
+    public String joinForm2(@ModelAttribute JoinForm form){
+        return "joinForm2";
+    }
+
+
     @PostMapping("/join")
-    public ResultForm join(@Valid @RequestBody JoinForm form){
+    public ResultForm join(@Valid @ModelAttribute JoinForm form){
         return userService.joinUser(form);
     }
 
