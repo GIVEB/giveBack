@@ -16,7 +16,7 @@
             background-color:rgba(244, 244, 244, 1);
             width:75%;
             min-width: 480px;
-            min-height:300px;
+            min-height:200px;
             margin:0 auto;     
             margin-bottom:100px;           
             border: 1px solid rgba(217, 217, 217, 1);
@@ -55,38 +55,24 @@
         margin:0;
        }
         
-       .join-input {
-        width:90%;
-        height:40px;
-        margin:8px;
-        border:none;
-        border-radius: 4px;
-        padding-left:15px;
-        color:rgba(203, 202, 202, 1);
-        border-bottom:1px solid rgba(203, 202, 202, 1);
-        display:inline-block;
+       #btn-container {
+        justify-content: center;
+        align-items: center;
+        text-align: center;
        }
 
-       .check-btn {
-        height:40px;
-        margin:8px;
-        border:none;
-        border-radius: 7px;
-        background-color: rgba(256, 126, 126, 1);
+       #login-btn {
+        background-color: rgba(255, 126, 126, 1);
         color:white;
-        display:inline-block;
-       }
-
-       .sex-btn {
-        background-color: white;
-        width:20%;
-        height:40px;
-        color:black;
-        display: inline-block;
-        border-radius: 5px;
         border:none;
-        margin:4px;
-       }
+        border-radius: 8px;
+        display:inline-block;
+        width:165px;
+        height:40px;
+        text-align:center;
+        margin:30px;
+       } 
+
     </style>
 </head>
 
@@ -135,11 +121,11 @@
                             </div>
                         </div>
                         <div class="signup-container-col2_4" style="padding:0; width:11%;">
-                            <div class="next-sign" style="color:rgba(244, 224, 193, 1);">></div>
+                            <div class="next-sign">></div>
                         </div>
                         <div class="signup-container-col1_3_5" style="width:25%;">
-                            <div class="signup-step-block-off">
-                                <label class="label-style">step03.</label><br>
+                            <div class="signup-step-block-on">
+                                <label class="label-style" style="color:rgba(255, 77, 77, 1);">step03.</label><br>
                                 <label class="label-style">가입완료</label>
                             </div>
                         </div>
@@ -151,34 +137,21 @@
         
         <div class="row">
             <div class="col-3" style="margin-left:15px; font-weight:bolder"></div>
-            <div class="col-6"><div style="width:75%; padding-left:70px;"><p style="font-weight:bolder">회원정보 입력</p></div></div>
+            <div class="col-6"><div style="width:75%; padding-left:70px;"><p style="font-weight:bolder">가입 완료</p></div></div>
             <div class="col-3"></div>
         </div>
 
         <div class="row">
             <div class="col-3"></div>
             <div class="col-6"  style="margin:0;">
-                <form class="signup-form " action="/view/users/join" method="post">
-                    <input class="join-input" style="margin-top:35px;" value="이메일"/>
-                    <button class="check-btn" style="width:90%;">중복 검사</button>
-                    <input class="join-input" value="인증번호" style="width:60%;"/> 
-                    <button class="check-btn" style="width:26%;">인증</button>
-                    <input class="join-input" value="비밀번호 입력"/>
-                    <input class="join-input" value="비밀번호 재확인"/>
-                    <input class="join-input" value="이름" style="width:44%;"/>
-                    <button class="sex-btn">남</button>
-                    <button class="sex-btn">여</button>
-                    <input class="join-input" value="생년월일" style="width:40%;"/>
-                    <input class="join-input" value="전화번호 ex) 010-1234-5678" style="width:46%;"/>
-                    <input class="join-input" value="주소"/>
-                    <input class="join-input" value="상세주소"/>
-                    <div class="row align-center justify-content-center"><button type="submit" class="cert-me-btn">회원가입</button></div>
+                <form class="signup-form">
+                    <label class="bold-title" style="font-size:18px; margin-top:50px;">회원가입이 완료되었습니다!</label>
+                    <div id="btn-container">
+                        <button type=button onclick="location.href='login'" id="login-btn">로그인</button>
+                    </div>
                 </form>
-                            </div>
-            <div class="col-3"></div>
-            
-        </div>
-    </div>
+
+        </div> 
 
     <footer class="container-fluid footer">
         <h3 style="padding:10px;">기브</h3>

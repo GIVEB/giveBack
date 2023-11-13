@@ -63,6 +63,10 @@ public class ViewUserController {
         return "joinForm2";
     }
 
+    @GetMapping("/joinComplete")
+    public String joinCompleView(){
+        return "joinCompleView";
+    }
 
     @PostMapping("/join")
     public ResultForm join(@Valid @ModelAttribute JoinForm form){
