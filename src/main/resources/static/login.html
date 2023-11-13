@@ -61,7 +61,8 @@
             "loginPassword" : $INPUTPASSWOR.value
         };
 
-
+        console.log(login.loginEmail, login.loginPassword);
+        
         document.form.json.value = JSON.stringify(login);
 
         document.form.submit();
