@@ -55,6 +55,7 @@
 
         const $INPUTEMAIL = document.getElementById('inputEmail');
         const $INPUTPASSWOR = document.getElementById('inputPassword');
+        const $loginForm = document.getElementById('loginForm')
 
         var login = {
             "loginEmail" : $INPUTEMAIL.value,
@@ -63,7 +64,7 @@
 
         console.log(login.loginEmail, login.loginPassword);
 
-        document.getElementById('loginForm').json.value = JSON.stringify(login);
+        $loginForm.json = JSON.stringify(login);
 
         document.getElementById('loginForm').submit();
 
