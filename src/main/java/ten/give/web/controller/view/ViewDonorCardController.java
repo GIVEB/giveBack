@@ -33,9 +33,9 @@ public class ViewDonorCardController {
     public String getList(Authentication authentication, Model model){
 
         // 관리자 권한인 2L 이 아니면 , 수정 필요
-        if (Long.valueOf(authentication.getName()) != admin){
+        /*if (Long.valueOf(authentication.getName()) != admin){
             return "redirect:/";
-        }
+        }*/
 
         model.addAttribute("cardList",cardService.getCardList());
 
