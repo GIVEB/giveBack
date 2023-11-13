@@ -42,7 +42,13 @@ public class DonorCardController {
         if (Long.valueOf(authentication.getName()) != admin){
             return new ResultForm(false,"허용되지 않은 접근입니다 [getList]");
         }
-        Map<String,List<DonorCardInfoForm>> result = cardService.getCardList();
+
+        List<DonorCardInfoForm> cardList = cardService.getCardList();
+
+        Map<String,List<DonorCardInfoForm>> result = new HashMap<>();
+
+        result.put("donorCard",cardList);
+
         return result;
     }
 

@@ -26,17 +26,13 @@ public class DonorCardService {
     private final DonorCardRepository cardRepository;
     private final UserRepository userRepository;
 
-    public Map<String, List<DonorCardInfoForm>> getCardList(){
-
-        Map<String,List<DonorCardInfoForm>> result = new HashMap<>();
+    public List<DonorCardInfoForm> getCardList(){
 
         List<DonorCardInfoForm> cardInfoList = new ArrayList<>();
 
         cardRepository.findAll().listIterator().forEachRemaining(card -> cardInfoList.add(card.donorCardToDonorCardInfoForm()));
 
-        result.put("donorCard",cardInfoList);
-
-        return result;
+        return cardInfoList;
     }
 
     public DonorCardInfoForm getCard(Long cardId) {
