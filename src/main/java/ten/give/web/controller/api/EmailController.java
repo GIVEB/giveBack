@@ -1,4 +1,4 @@
-package ten.give.web.controller;
+package ten.give.web.controller.api;
 
 import io.swagger.annotations.*;
 import lombok.RequiredArgsConstructor;

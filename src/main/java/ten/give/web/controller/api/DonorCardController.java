@@ -1,4 +1,4 @@
-package ten.give.web.controller;
+package ten.give.web.controller.api;
 
 import io.swagger.annotations.*;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +19,7 @@ import java.util.Map;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/donorcards")
+@RequestMapping("/api/donorcards")
 @Api(tags = "DonorCardController")
 public class DonorCardController {
 

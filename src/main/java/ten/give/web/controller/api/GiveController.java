@@ -1,4 +1,4 @@
-package ten.give.web.controller;
+package ten.give.web.controller.api;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -19,7 +19,7 @@ import java.util.Map;
 @Api(tags = "DonorCardController")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/give")
+@RequestMapping("/api/give")
 public class GiveController {
 
     private final DonorCardService cardService;

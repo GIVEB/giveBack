@@ -1,4 +1,4 @@
-package ten.give.web.controller;
+package ten.give.web.controller.api;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -17,8 +17,8 @@ import java.util.List;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-@Api(tags = "EmailController")
-@RequestMapping("/")
+@Api(tags = "FollowController")
+@RequestMapping("/api/")
 public class FollowController {
 
     private final FollowService followService;
