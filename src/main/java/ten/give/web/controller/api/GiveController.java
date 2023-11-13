@@ -12,6 +12,7 @@ import ten.give.web.form.DonationForm;
 import ten.give.web.form.DonorCardInfoForm;
 import ten.give.web.service.DonorCardService;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -36,7 +37,11 @@ public class GiveController {
     @PostMapping
     public Map<String, List<DonorCardInfoForm>> getList(@RequestBody DonationForm form, Authentication authentication){
 
-        Map<String, List<DonorCardInfoForm>> result = cardService.DonationCard(form.getUserId(), form.getCardIdList(),authentication.getName());
+        Map<String, List<DonorCardInfoForm>> result = new HashMap<>();
+
+        List<DonorCardInfoForm> donorCardInfoForms = cardService.DonationCard(form.getUserId(), form.getCardIdList(), authentication.getName());
+
+        result.put("donorCard",donorCardInfoForms);
 
         return result;
 

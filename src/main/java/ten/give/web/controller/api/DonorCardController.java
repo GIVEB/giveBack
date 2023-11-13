@@ -178,8 +178,8 @@ public class DonorCardController {
     public Map<String,Integer> cardCount(@PathVariable Long userId){
 
         Map<String, Integer> result = new HashMap<>();
+
         Integer cardCount = cardService.getCardCount(userId);
-        log.info("count : {}",cardCount);
         result.put("count",cardCount);
 
         return result;
@@ -219,7 +219,12 @@ public class DonorCardController {
             throw new IllegalArgumentException("관리자가 아닙니다.");
         }
 
-        Map<String,List<DonorCardInfoForm>> result = cardService.getCardListByUserId(userId);
+        List<DonorCardInfoForm> cardListByUserId = cardService.getCardListByUserId(userId);
+
+        Map<String,List<DonorCardInfoForm>> result = new HashMap<>();
+
+        result.put("donorCard",cardListByUserId);
+
         return result;
     }
 
@@ -240,7 +245,12 @@ public class DonorCardController {
     @GetMapping("/list")
     public Map<String,List<DonorCardInfoForm>> getCardListByUserId(Authentication authentication){
 
-        Map<String,List<DonorCardInfoForm>> result = cardService.getCardListByUserId(Long.valueOf(authentication.getName()));
+        List<DonorCardInfoForm> cardListByUserId = cardService.getCardListByUserId(Long.valueOf(authentication.getName()));
+
+        Map<String,List<DonorCardInfoForm>> result = new HashMap<>();
+
+        result.put("donorCard",cardListByUserId);
+
         return result;
 
     }

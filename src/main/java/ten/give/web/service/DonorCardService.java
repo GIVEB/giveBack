@@ -100,16 +100,13 @@ public class DonorCardService {
     }
 
 
-    public Map<String,List<DonorCardInfoForm>> getCardListByUserId(Long userId) {
-        Map<String,List<DonorCardInfoForm>> result = new HashMap<>();
+    public List<DonorCardInfoForm> getCardListByUserId(Long userId) {
 
         List<DonorCardInfoForm> cardInfoList = new ArrayList<>();
 
         cardRepository.getCardListByUserId(userId).stream().iterator().forEachRemaining(card -> cardInfoList.add(card.donorCardToDonorCardInfoForm()));
 
-        result.put("donorCard",cardInfoList);
-
-        return result;
+        return cardInfoList;
     }
 
     private void printDonorCard(DonorCard c) {
@@ -118,9 +115,7 @@ public class DonorCardService {
     }
 
     @Transactional
-    public Map<String,List<DonorCardInfoForm>> DonationCard(Long toId, List<Long> cardIdList, String loginId){
-
-        Map<String,List<DonorCardInfoForm>> result = new HashMap<>();
+    public List<DonorCardInfoForm> DonationCard(Long toId, List<Long> cardIdList, String loginId){
 
         List<DonorCardInfoForm> cardInfoList = new ArrayList<>();
 
@@ -165,9 +160,7 @@ public class DonorCardService {
 
         }
 
-        result.put("donorCard",cardInfoList);
-
-        return result;
+        return cardInfoList;
 
     }
 
