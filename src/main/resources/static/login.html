@@ -25,7 +25,7 @@
     </header>
 
 
-    <form action="http://www.givedonorcards.com/users/login" method="post" >
+    <form id="loginForm" action="http://www.givedonorcards.com/users/login" method="post" >
 
         <div class="mb-3">
             <label for="inputEmail" class="form-label">Email address</label>
@@ -62,10 +62,10 @@
         };
 
         console.log(login.loginEmail, login.loginPassword);
-        
-        document.form.json.value = JSON.stringify(login);
 
-        document.form.submit();
+        document.getElementById('loginForm').json.value = JSON.stringify(login);
+
+        document.getElementById('loginForm').submit();
 
     }
 </script>
