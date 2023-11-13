@@ -17,9 +17,13 @@ public class GradeUtils {
 
     public static Grade getGrade(Long donationCount, Long totalDonationCount){
 
+        if(donationCount == 0){
+            return Grade.PAPERCUP;
+        }
+
         double ratio = (donationCount / totalDonationCount) * 100;
 
-        if (ratio < PAPERCUP){
+        if (ratio <= PAPERCUP){
             return Grade.PAPERCUP;
         }else if (ratio < MUGCUP){
             return Grade.MUGCUP;

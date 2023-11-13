@@ -10,8 +10,8 @@ import ten.give.common.enums.Gender;
 
 import java.time.LocalDate;
 
-@ApiModel(value = "Donor Card 등록 정보")
 @Data
+@ApiModel(value = "헌혈증 등록 정보")
 public class DonorAddForm {
 
     @ApiModelProperty(value = "헌혈자 이름", required = true, example = "양지웅")
@@ -31,7 +31,7 @@ public class DonorAddForm {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate donorDate;
 
-    @ApiModelProperty(value = "혈액원", required = true, example = "충청북도")
+    @ApiModelProperty(value = "혈액원 [0,1,2]", required = true, example = "충청북도")
     private DonorCenter donorCenter;
 
 

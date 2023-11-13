@@ -16,10 +16,10 @@ import java.time.LocalDate;
 @Setter
 @Builder
 @AllArgsConstructor
-@ApiModel(value = "DonorCard 정보")
+@ApiModel(value = "헌혈증 정보")
 public class DonorCardInfoForm {
 
-    @ApiModelProperty(value="카드 ID", example = "2")
+    @ApiModelProperty(value="카드 아이디", example = "2")
     private Long cardId;
     @ApiModelProperty(value="헌혈 종류", example = "PLASMA", required = true)
     private DonorKind kind;
@@ -27,11 +27,11 @@ public class DonorCardInfoForm {
     private LocalDate birth;
     @ApiModelProperty(value="헌혈자 이름", example = "양지웅", required = true)
     private String name;
-    @ApiModelProperty(value="성별", example = "M", required = true)
+    @ApiModelProperty(value="성별 ", example = "M", required = true)
     private Gender gender;
     @ApiModelProperty(value="헌혈 날짜 [년-월-일]", example = "2023-09-01", required = true)
     private LocalDate donorDate;
-    @ApiModelProperty(value="혈액원", example = "충청북도", required = true)
+    @ApiModelProperty(value="혈액원 [0,1,2]", example = "충청북도", required = true)
     private DonorCenter donorCenter;
     @ApiModelProperty(value="소유자 ID", example = "3", required = true)
     private Long userId;

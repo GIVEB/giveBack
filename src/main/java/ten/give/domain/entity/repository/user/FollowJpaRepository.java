@@ -16,7 +16,6 @@ public interface FollowJpaRepository extends JpaRepository<Follow,Long> {
     @Query(value = "select f from Follow f where f.fromUser.userId = :fromId and f.toUser.userId = :toId")
     Optional<Follow> checkFollow(@Param("fromId") long fromId, @Param("toId") long toId);
 
-
     @Modifying
     @Query(value = "delete from Follow f where f.fromUser.userId = :fromId and f.toUser.userId = :toId")
     void deleteFollow(@Param("fromId") long fromId, @Param("toId") long toId);

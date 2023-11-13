@@ -5,9 +5,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import ten.give.web.form.EmailResultForm;
+import ten.give.web.form.SendEmailForm;
 import ten.give.web.service.EmailService;
-
-import java.util.Map;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -19,28 +18,24 @@ public class EmailController {
     private final EmailService emailService;
 
     @ApiOperation(
-            value = "DonorCard 정보 수정하기",
-            notes = "Donor Card 정보 수정하기<br>" +
+            value = "Send E-mail",
+            notes = "E-mail 로 인증 번호 보내기 <br>" +
                     "[ EX ] URL : http://localhost:8080/email/sendmail")
     @ApiImplicitParams(
             value = {
                     @ApiImplicitParam(
                             name = "email",
-                            value = "인증 token을 전송할 e-mail 주소",
+                            value = "인증 token 을 전송할 e-mail 주소",
                             required = true,
-                            dataType = "JSON",
+                            dataType = "json",
                             paramType = "body",
                             defaultValue = "None"
                     )
             }
     )
     @PostMapping("/sendemail")
-    public EmailResultForm sendEmail(@RequestBody Map<String,Object> email){
-
-        log.info("toEmail  : {}", (String) email.get("toEmail"));
-        String toEmail = (String) email.get("toEmail");
-
-        return emailService.sendEmail(toEmail);
+    public EmailResultForm sendEmail(@RequestBody SendEmailForm form){
+        return emailService.sendEmail(form.getToEmail());
 
     }
 

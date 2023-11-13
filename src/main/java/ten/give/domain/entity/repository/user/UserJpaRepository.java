@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Component;
+import ten.give.domain.entity.user.Account;
 import ten.give.domain.entity.user.User;
 
 import java.util.List;
@@ -23,4 +24,7 @@ public interface UserJpaRepository  extends JpaRepository<User,Long> {
 
     @Query(value = "select u from User u where u.name = :name and u.phone = :phoneNumber")
     User findUserByNameAndPhoneNumber(@Param("name") String name,@Param("phoneNumber") String phoneNumber);
+
+    @Query(value = "select u from User u where u.phone = :phone")
+    Optional<User> findUserByPhoneNumber(@Param("phone") String phone);
 }

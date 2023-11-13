@@ -1,5 +1,5 @@
-name: Java CI with Gradle 
-
+name: Java CI with Gradle  
+ 
 on:
   push:
     branches: [ main ]
@@ -15,7 +15,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: '11'
-          distribution: 'adopt'
+          distribution: 'temurin'
       - name: Grant execute permission for gradlew
         run: |
           pwd
@@ -31,17 +31,18 @@ jobs:
         run: |
           docker login -u ${{ secrets.USERNAME }} -p ${{ secrets.PASSWORD }}
           docker build -t spring-cicd .
-          docker tag spring-cicd duddns119/spring-cicd:${GITHUB_SHA::7}
-          docker push duddns119/spring-cicd:${GITHUB_SHA::7}
+          docker tag spring-cicd shinywoon/spring-cicd:${GITHUB_SHA::7}
+          docker push shinywoon/spring-cicd:${GITHUB_SHA::7}
       - name: Deploy
         uses: appleboy/ssh-action@master
         with:
-          host: ec2-3-36-109-72.ap-northeast-2.compute.amazonaws.com
+          host: ${{ secrets.HOST }}
           username: ubuntu
           key: ${{ secrets.PRIVATE_KEY }}
           envs: GITHUB_SHA
           script: |
-            docker pull duddns119/spring-cicd:${GITHUB_SHA::7}
-            docker tag duddns119/spring-cicd:${GITHUB_SHA::7} spring-cicd
-            docker stop server
-            docker run -d --rm --name server -p 80:8080 spring-cicd
+            docker stop give
+            docker rm give
+            docker pull shinywoon/spring-cicd:${GITHUB_SHA::7}
+            docker tag shinywoon/spring-cicd:${GITHUB_SHA::7} spring-cicd
+            docker run -d --name give --rm -p 80:8080 spring-cicd

@@ -7,10 +7,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ten.give.domain.entity.user.Follow;
 import ten.give.domain.exception.form.ResultForm;
 import ten.give.web.service.FollowService;
@@ -29,7 +26,8 @@ public class FollowController {
     @ApiOperation(
             value = "Follow",
             notes = "Follow 하기 <br>" +
-                    "[ EX ] URL : http://localhost:8080/follow/{toId}")
+                    "타인을 Follow 합니다." +
+                    "[ EX ] URL : http://localhost:8080/follow/3")
     @ApiImplicitParams(
             value = {
                     @ApiImplicitParam(
@@ -44,8 +42,8 @@ public class FollowController {
                             name = "toId",
                             value = "Follow 할 ID",
                             required = true,
-                            dataType = "String",
-                            paramType = "body",
+                            dataType = "Long",
+                            paramType = "path",
                             defaultValue = "None"
                     )
             }
@@ -58,12 +56,13 @@ public class FollowController {
     @ApiOperation(
             value = "unFollow",
             notes = "unFollow 하기 <br>" +
-                    "[ EX ] URL : http://localhost:8080/unfollow/{toId}")
+                    "타인은 unFollow 합니다." +
+                    "[ EX ] URL : http://localhost:8080/unfollow/3")
     @ApiImplicitParams(
             value = {
                     @ApiImplicitParam(
                             name = "authentication",
-                            value = "Follow 할 ID",
+                            value = "로그인 사용자 Token",
                             required = true,
                             dataType = "Authentication",
                             paramType = "body",
@@ -71,10 +70,10 @@ public class FollowController {
                     ),
                     @ApiImplicitParam(
                             name = "toId",
-                            value = "Follow 할 ID",
+                            value = "unFollow 할 ID",
                             required = true,
-                            dataType = "String",
-                            paramType = "body",
+                            dataType = "Long",
+                            paramType = "path",
                             defaultValue = "None"
                     )
             }
@@ -86,13 +85,13 @@ public class FollowController {
 
     @ApiOperation(
             value = "show Following",
-            notes = "Following 인원 보기 <br>" +
+            notes = "Following 목록 보기 <br>" +
                     "[ EX ] URL : http://localhost:8080/followings")
     @ApiImplicitParams(
             value = {
                     @ApiImplicitParam(
                             name = "authentication",
-                            value = "로그인 ID",
+                            value = "로그인 사용자 정보",
                             required = true,
                             dataType = "Authentication",
                             paramType = "body",
@@ -100,7 +99,7 @@ public class FollowController {
                     )
             }
     )
-    @PostMapping("/followings")
+    @GetMapping("/followings")
     public List<Follow> followings(Authentication authentication){
         return followService.getFollowing(Long.valueOf(authentication.getName()));
     }
@@ -121,7 +120,7 @@ public class FollowController {
                     )
             }
     )
-    @PostMapping("/followers")
+    @GetMapping("/followers")
     public List<Follow> Followers(Authentication authentication){
         return followService.getFollower(Long.valueOf(authentication.getName()));
     }

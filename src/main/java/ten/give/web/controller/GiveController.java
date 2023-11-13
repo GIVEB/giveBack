@@ -1,6 +1,5 @@
 package ten.give.web.controller;
 
-
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -27,7 +26,7 @@ public class GiveController {
 
     @ApiOperation(
             value = "DonorCard Donation To Redbox",
-            notes = "Redbox 로 기부하기 <br>" +
+            notes = "Red box 에 기부하기 <br>" +
                     "[ EX ] URL : http://localhost:8080/give" +
                     "관리자 계정 외 red box 내 card 접근 시 404 Exception 발생" +
                     "그외 card 는 관리자 외 접근 가능")

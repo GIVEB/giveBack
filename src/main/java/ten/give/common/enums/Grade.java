@@ -1,5 +1,7 @@
 package ten.give.common.enums;
 
+
+
 public enum Grade {
 
     PAPERCUP("papercup"),
