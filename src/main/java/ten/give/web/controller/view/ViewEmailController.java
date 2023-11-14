@@ -21,7 +21,6 @@ public class ViewEmailController {
 
     private final EmailService emailService;
 
-
     @PostMapping("/sendemail")
     public String sendEmail(@ModelAttribute SendEmailForm form, Model model){
         model.addAttribute("token",emailService.sendEmail(form.getToEmail()));

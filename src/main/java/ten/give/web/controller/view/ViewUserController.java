@@ -91,8 +91,23 @@ public class ViewUserController {
     @PostMapping("/findemail")
     public String findEmail(@ModelAttribute FindEmailForm form, Model model){
         ResultForm email = userService.findEmail(form.getName(), form.getPhoneNumber());
+        String startEmail = starEditEmail(email.getBody());
+        email.setBody(startEmail);
         model.addAttribute("email",email);
         return "findEmailResult";
+    }
+
+    private String starEditEmail(String email) {
+        String[] split = email.split("@");
+        int len = split[0].length();
+        int subTargetIndex = len / 2;
+        int starts = subTargetIndex;
+
+        if (len % 2 != 0){
+            starts +=1;
+        }
+
+        return split[0].replace(split[0].substring(subTargetIndex),"*".repeat(starts))+"@"+split[1];
     }
 
     @GetMapping("/findpassword")
@@ -127,7 +142,6 @@ public class ViewUserController {
         return userInfoForm;
 
     }
-
 
 
     @ApiOperation(
