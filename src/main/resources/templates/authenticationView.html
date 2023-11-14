@@ -166,6 +166,8 @@
                         <p th:field="*{createTime}" th:text="*{createTime}"></p>
 
                         <input id="targetToken" type="hidden" th:value="*{token}">
+                        <input id="tokenExpireTime" type="hidden" th:value="*{expireTime}">
+                        <input id="tokenCreateTime" type="hidden" th:value="*{createTime}">
                         <div class="row align-items-center justify-content-center">
                             <input id="inputToken" type="text" class="input-underline input-text" name="token" placeholder="인증 번호 "><br>
                         </div>
@@ -210,18 +212,36 @@
     <script>
         function checkToken(){
 
-            const $targetTokenValue = document.getElementById('targetToken').value;
-            const $inputTokenValue = document.getElementById('inputToken').value;
+            const $targetTokenValue = document.getElementById('targetToken');
+            const $inputTokenValue = document.getElementById('inputToken');
             const $HIDDENFORM = document.getElementById('hiddenForm');
+            const TOKENEXPIRETIME = Number(document.getElementById('tokenExpireTime').value);
+            const TOKENCREATETIME = document.getElementById('tokenCreateTime').value;
 
-            if ($targetTokenValue == $inputTokenValue){
+            const createtime = new Date(TOKENCREATETIME).getTime();
+            const expiretime = createtime + (TOKENEXPIRETIME*1000);
+
+            console.log(Date.now());
+            console.log(expiretime);
+
+            if (Date.now() > expiretime){
+                alert("token 만료!!");
+            }
+
+
+            if (!$inputTokenValue.value){
+                alert("인증 번호를 입력하세요!");
+                return;
+            }
+
+            if ($targetTokenValue.value == $inputTokenValue.value){
                 alert("ok");
                 $HIDDENFORM.submit();
             }else {
-                alert("본인 인증 실패");
-                location.replace("/view/users/findpassword");
+                alert("본인 인증 실패!! Token을 확인 해 주세요!");
+                $inputTokenValue.value = '';
+                $inputTokenValue.focus();
             }
-
 
         }
     </script>
