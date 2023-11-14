@@ -155,17 +155,17 @@
             <div class="card" style="width: 50rem; height: 25rem;">
                 <div class="card-body">
                     <div class="container">
-                        <form class="login-form" action="/view/users/login" method="post">
+                        <form id="loginForm" class="login-form" action="/view/users/login" method="post">
                             <div class="d-flex row justify-content-center">
                                 <p></p>
                                 <p id="loginHeader" class="col-4 text-center">로그인</p>
                                 <p></p>
                             </div>
                             <div class="row align-items-center justify-content-center">
-                                <input type="email" class="input-underline input-text" name="inputEmail" placeholder="이메일"><br>
+                                <input id="inputEmail" type="email" class="input-underline input-text" name="inputEmail" placeholder="이메일"><br>
                             </div>
                             <div class="row align-items-center justify-content-center">
-                                <input type="password" class="input-underline input-text" name="inputPassword" placeholder="비밀번호"><br>
+                                <input id="inputPassword" type="password" class="input-underline input-text" name="inputPassword" placeholder="비밀번호"><br>
                             </div>
                             <div class="d-flex justify-content-center">
                                 <div class="row">
@@ -174,7 +174,7 @@
                                 </div>
                             </div>
                             <div class="row align-items-center justify-content-center">
-                                <button type="submit" id="login-btn">로그인</button>
+                                <button type="button" onclick="login()" id="login-btn">로그인</button>
                             </div>
                         </form>
                     </div>
@@ -203,5 +203,36 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
                 integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
                 crossorigin="anonymous"></script>
+
+        <script>
+
+            const $inputEmail = document.getElementById('inputEmail');
+            const $inputPassword = document.getElementById('inputPassword');
+            const $loginForm = document.getElementById('loginForm');
+
+            $inputPassword.addEventListener('focus',()=>{
+                if(!$inputEmail.value){
+                    alert("아이디를 입력하세요!");
+                    $inputEmail.focus();
+                }
+            })
+
+            function login(){
+
+                if((!$inputEmail.value && !$inputPassword.value)){
+                    alert("이메일을 입력해 주세요.");
+                    $inputEmail.focus();
+                }else if (!$inputPassword.value){
+                    alert("비밀번호를 입력해 주세요.");
+                    $inputPassword.focus();
+                }else{
+                    $loginForm.submit();
+                }
+
+            }
+
+
+        </script>
+
     </body>
 </html>
