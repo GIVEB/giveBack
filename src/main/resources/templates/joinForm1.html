@@ -1,15 +1,12 @@
 
     <head>
         <meta charset="UTF-8">
-        <link href="StyleForm.css?after" rel="stylesheet" type="text/css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
             integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
         <style>
 
             .container {
-                margin:0;
-                width:100%;
-                max-width: none;
+                width:80%;
             }
 
             .signup-form {
@@ -24,20 +21,19 @@
               }
             
             .cert-me-btn {
-                width: 150px;
-                height:45px;
+                width: 80%;
+                height: 45px;
                 border:none;
                 font-size:15px;
-                margin:30px;
                 color:white;
                 border-radius: 14px;
                 background-color: rgba(255, 126, 126, 1);
-                margin-bottom:50px;
+                margin: 40px 0px;
             }
 
             #terms-box {
                 width:97%; 
-                height:200px; 
+                height: 300px;
                 margin:10px;
                 border:1px solid rgba(217, 217, 217, 1);
                 border-radius:15px;
@@ -53,23 +49,73 @@
             font-size:12px;
             margin:0;
            }
-            
+
+
+            #loginBtn{
+                transition: 1s;
+            }
+
+            #loginBtn:hover{
+                background: #ffff;
+                border: 1px solid blue;
+                color: black;
+            }
+
+            a{
+                text-decoration: none;
+                color: black;
+            }
+
+            body{
+                height: 938px;
+            }
+
+            #contents{
+                width: 100%;
+                height: 70%
+            }
+
+            #outer{
+                width: 65%;
+                height: 10%;
+                background: #FFF8ED;
+                border-radius: 5px;
+                border: 2px solid #F4E0C1;
+                margin-bottom:  10px;
+            }
+
+            .current{
+                color: #FE0000;
+            }
+
+           #agreeContent{
+               width: 53%;
+           }
+
+          .form-check{
+            margin-left: 10px;
+           }
+
         </style>
     </head>
 
     <body>
-        <div class="header">
-            <div class="row align-items-center" style="width:100%;">
-            <div class="col-7 ms-5">
-                <img src="img/Main_title.png" alt="#" width="140" height="140">
+
+    <div class="container">
+        <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+            <div class="col-md-3 mb-2 mb-md-0">
+                <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
+                    GIVE
+                </a>
             </div>
-            <div class="col-4">
-                <a class="col-1 menufont" href="Event.html">이벤트</a> 
-                <a class="col-1 menufont" href="InQuiry.html">문의</a>
-                <a class="col-2 menufont" href="ViewMyAccount.html">마이페이지</a>        
-            </div>            
+
+            <div class="col-md-3 text-end mr-3">
+                <button id="loginBtn" type="button" class="btn btn-primary" onclick="location.replace('/view/users/login')">Login</button>
             </div>
-        </div>
+        </header>
+    </div>
+
+    <section id="contents">
 
         <div class="container">
             <div class="row">
@@ -79,42 +125,27 @@
                 </div>
                 <div class="col-3"></div>
             </div>
-            <div class="row">
-                <div class="col-3"></div>
-                <div class="col-6" style="padding:0;">
-                    <div class="signup-container">
-                        <div class="row signup-info" style="margin:0;">
-                            <div class="signup-container-col1_3_5" style="width:25%;">
-                                <div class="signup-step-block-on">
-                                    <label class="label-style" style="color:rgba(255, 77, 77, 1);">step01.</label><br>
-                                    <label class="label-style">약관동의/본인인증</label>
-                                </div>
-                            </div>
-                            <div class="signup-container-col2_4" style="padding-left:20px; width:11%;">
-                                <div class="next-sign">></div>
-                            </div>
-                            <div class="signup-container-col1_3_5" style="width:25%;">
-                                <div class="signup-step-block-off">
-                                    <div class="step-block">
-                                        <label class="label-style">step02.</label><br>
-                                    <label class="label-style">회원정보 입력</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="signup-container-col2_4" style="padding:0; width:11%;">
-                                <div class="next-sign" style="color:rgba(244, 224, 193, 1);">></div>
-                            </div>
-                            <div class="signup-container-col1_3_5" style="width:25%;">
-                                <div class="signup-step-block-off">
-                                    <label class="label-style">step03.</label><br>
-                                    <label class="label-style">가입완료</label>
-                                </div>
-                            </div>
+
+            <div id="progress">
+
+                <div class="container d-flex justify-content-center">
+                    <div id="outer">
+                        <div class="container" id="steps">
+                            <p class="row justify-content-evenly">
+                                <span id="step1" class="col-3 current">step01.</span>
+                                <span class="col-1 next"> > </span>
+                                <span id="step2" class="col-3">step02.</span>
+                                <span class="col-1 next"> > </span>
+                                <span id="step3" class="col-3">step03.</span>
+                            </p>
+
                         </div>
+
                     </div>
                 </div>
-                <div class="col-3"></div>
-            </div>            
+
+            </div>
+
             
             <div class="row">
                 <div class="col-3" style="margin-left:15px; font-weight:bolder"></div>
@@ -122,8 +153,7 @@
             </div>
 
             <div class="row">
-                <div class="col-3"></div>
-                <div class="col-6"  style="margin:0;">
+                <div id="agreeContent" class="container d-flex justify-content-center">
                     <form class="signup-form ">
                         <div class="row" style="margin:0;">
                             <div id="terms-box">
@@ -155,39 +185,36 @@
                                     본인은 개인정보보호법 제15조에 따라 개인정보 수집 및 이용에 대한 안내사항을 고지 받고 개인정보 처리에 동의합니다.</p>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-3">
-                                <input type="radio" id="agree" style="border:1px solid rgba(217, 217, 217, 1);">
-                                <label style="font-size:15px; min-width:70px;" id="agreeLabel">동의합니다</label>
-                            </div>
+
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="agree">
+                                    <label class="form-check-label" for="agree"> 위 약관을 모두 읽었으며 이에 동의합니다.</label>
+                                </div>
+
+                                <div class="row align-center justify-content-center"><button type="button" onclick="continueJoin()" class="cert-me-btn">회원가입 진행하기</button></div>
+
                         </div>
                     </form>
-                    <div class="row align-center justify-content-center"><button type="button" onclick="continueJoin()" class="cert-me-btn">회원가입 진행하기</button></div>
                 </div>
-                <div class="col-3"></div>
-                
             </div>
         </div>
+    </section>
 
-        <footer class="container-fluid footer">
-            <h3 style="padding:10px;">기브</h3>
-            <div class="row">
-                <div class="col-3"></div>
-                <div class="col-2"><button class="customer-center-btn">헌혈의 집 찾기</button></div>
-                <div class="col-2"><button class="customer-center-btn">고객센터</button></div>                
-                <div class="col-2"><button class="customer-center-btn">레드커넥트</button></div>
-                <div class="col-3"></div>
-            </div>
-            <div class="row">
-                <div class="col-3"></div>
-                <div class="col-9" style="text-align:left;"><p class="source_text">[26465]강원특별자치도 원주시 혁신로 50 대한적십자사 혈액관리본부</p></div>
-            </div>
-            <div class="row">
-                <div class="col-3"></div>
-                <div class="col-9" style="text-align:left;"><p class="source_text">COPYRIGHT(C) GIVE ALL RIGHTS RESERVED.</p></div>
-            </div>
-        </footer>
+    <footer class="container footer">
+        <hr>
+        <div class="row justify-content-center text-center">
+            <div class="col-3"></div>
+            <div class="col-2"><a href="https://www.bloodinfo.net/knrcbs/bh/hous/srchBldHousList.do?mi=1059" class="customer-center-btn">헌혈의 집 찾기</a></div>
+            <div class="col-2"><a href="https://www.bloodinfo.net/knrcbs/na/ntt/selectNttList.do?mi=1068&bbsId=1101" class="customer-center-btn">고객센터</a></div>
+            <div class="col-2"><a href="https://www.bloodinfo.net/knrcbs/cm/cntnts/cntntsView.do?mi=1125&cntntsId=1014" class="customer-center-btn">레드커넥트</a></div>
+            <div class="col-3 mt-5"></div>
+        </div>
+        <div class="row">
+            <div class="col-3"></div>
+            <hr>
+            <div class="col-9"><p class="source_text">Copyright(C).2023.GIVE.All rights reserved.</p></div>
+        </div>
+    </footer>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
                 integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
@@ -203,7 +230,7 @@
                 if ($AGREE.checked){
                     location.href ='join2';
                 }else{
-                    alert("동의 해야 다음 진행 가능");
+                    alert(" 동의 후 진행 가능합니다. ");
                 }
 
             }

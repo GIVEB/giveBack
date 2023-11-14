@@ -29,12 +29,19 @@ public class JwtFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
+            log.info(request.getRequestURI());
 
-            if(request.getRequestURI().equals("")){
+            if(!request.getRequestURI().equals("/")){
                 if(request.getRequestURI().substring(1,5).equals("view")){
+                    log.info("exception filter URI 'view'");
                     filterChain.doFilter(request,response);
                     return;
                 }
+            }
+
+            if(request.getRequestURI().equals("/")){
+                filterChain.doFilter(request,response);
+                return;
             }
 
 

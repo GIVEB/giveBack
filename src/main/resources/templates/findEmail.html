@@ -155,26 +155,25 @@
             <div class="card" style="width: 50rem; height: 25rem;">
                 <div class="card-body">
                     <div class="container">
-                        <form class="login-form" action="/view/users/login" method="post">
+                        <form class="login-form" action="/view/users/findemail" method="post">
                             <div class="d-flex row justify-content-center">
                                 <p></p>
-                                <p id="loginHeader" class="col-4 text-center">로그인</p>
+                                <p id="loginHeader" class="col-5 text-center">Email 찾기</p>
                                 <p></p>
                             </div>
                             <div class="row align-items-center justify-content-center">
-                                <input type="email" class="input-underline input-text" name="inputEmail" placeholder="이메일"><br>
+                                <input type="text" class="input-underline input-text" name="name" placeholder="이름"><br>
                             </div>
                             <div class="row align-items-center justify-content-center">
-                                <input type="password" class="input-underline input-text" name="inputPassword" placeholder="비밀번호"><br>
+                                <input type="text" class="input-underline input-text" name="phoneNumber" placeholder="전화번호"><br>
                             </div>
                             <div class="d-flex justify-content-center">
                                 <div class="row">
-                                    <button type="button" onclick="location.href = '/view/users/findemail'" class="find">이메일 찾기</button>
                                     <button type="button" onclick="location.href = '/view/users/findpassword'" class="find">비밀번호 찾기</button>
                                 </div>
                             </div>
                             <div class="row align-items-center justify-content-center">
-                                <button type="submit" id="login-btn">로그인</button>
+                                <button type="submit" id="login-btn">본인 인증</button>
                             </div>
                         </form>
                     </div>

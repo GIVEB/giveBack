@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ten.give.domain.entity.user.User;
@@ -73,51 +74,41 @@ public class ViewUserController {
         return userService.joinUser(form);
     }
 
-    @ApiOperation(
-            value = "withdrawal",
-            notes = "회원 탈퇴 <br>" +
-                    "<br> 로그인이 선행 되어 있어야 한다. " +
-                    "[ EX ] URL : http://localhost:8080/users/withdrawal")
-    @ApiImplicitParams(
-            value = {
-                    @ApiImplicitParam(
-                            name = "authentication",
-                            value = "로그인 회원 정보",
-                            required = true,
-                            dataType = "Authentication",
-                            paramType = "body",
-                            defaultValue = "None"
-                    )
-            }
-    )
-    @ApiResponses({
-            @ApiResponse(code=200, message="성공"),
-    })
+
     @PostMapping("/withdrawal")
-    public ResultForm withdrawal(Authentication authentication){
-        return userService.withdrawal(Long.valueOf(authentication.getName()));
+    public String withdrawal(Authentication authentication){
+        userService.withdrawal(Long.valueOf(authentication.getName()));
+        return "redirect:/";
     }
 
-    @ApiOperation(
-            value = "User information",
-            notes = "회원 정보 조회 <br>" +
-                    "<br> 로그인이 선행 되어 있어야 한다. " +
-                    "[ EX ] URL : http://localhost:8080/users/info")
-    @ApiImplicitParams(
-            value = {
-                    @ApiImplicitParam(
-                            name = "authentication",
-                            value = "로그인 회원 정보",
-                            required = true,
-                            dataType = "Authentication",
-                            paramType = "body",
-                            defaultValue = "None"
-                    )
-            }
-    )
-    @ApiResponses({
-            @ApiResponse(code=200, message="성공"),
-    })
+
+    @GetMapping("/findemail")
+    public String findEmailForm(@ModelAttribute FindEmailForm form){
+        return "findEmail";
+    }
+
+
+    @PostMapping("/findemail")
+    public String findEmail(@ModelAttribute FindEmailForm form, Model model){
+        ResultForm email = userService.findEmail(form.getName(), form.getPhoneNumber());
+        model.addAttribute("email",email);
+        return "findEmailResult";
+    }
+
+    @GetMapping("/findpassword")
+    public String findPasswordForm(@ModelAttribute FindPasswordForm form){
+        return "findPassword";
+    }
+
+
+    @PostMapping("/findpassword")
+    public String findPassword(@ModelAttribute SendEmailForm form, Model model){
+        log.info("name : {} , email : {}" , form.getName(), form.getToEmail());
+        model.addAttribute("newPassword",userService.findPassword(form.getName(),form.getToEmail()));
+        return "findPasswordResult";
+    }
+
+    // 손봐야 함
     @GetMapping("/info")
     public UserInfoForm showUserInfo(Authentication authentication){
 
@@ -136,6 +127,8 @@ public class ViewUserController {
         return userInfoForm;
 
     }
+
+
 
     @ApiOperation(
             value = "User information edit",
@@ -181,66 +174,6 @@ public class ViewUserController {
         return userInfoForm;
     }
 
-
-    @ApiOperation(
-            value = "find email",
-            notes = "email 찾기 <br>" +
-                    "로그인 되어 있지 않아도 됨" +
-                    "[ EX ] URL : http://localhost:8080/users/findemail")
-    @ApiImplicitParams(
-            value = {
-                    @ApiImplicitParam(
-                            name = "name",
-                            value = "사용자 이름",
-                            required = true,
-                            dataType = "String",
-                            paramType = "body",
-                            defaultValue = "None"
-                    ),
-                    @ApiImplicitParam(
-                            name = "phone number",
-                            value = "사용자 전화번호",
-                            required = true,
-                            dataType = "String",
-                            paramType = "body",
-                            defaultValue = "None"
-                    )
-            }
-    )
-    @PostMapping("/findemail")
-    public ResultForm findEmail(@RequestBody FindEmailForm form){
-        return userService.findEmail(form.getName(),form.getPhoneNumber());
-    }
-
-    @ApiOperation(
-            value = "find password",
-            notes = "password 찾기 <br>" +
-                    "로그인이 되어 있지 않아도 된다." +
-                    "[ EX ] URL : http://localhost:8080/users/findpassword")
-    @ApiImplicitParams(
-            value = {
-                    @ApiImplicitParam(
-                            name = "name",
-                            value = "사용자 이름",
-                            required = true,
-                            dataType = "String",
-                            paramType = "body",
-                            defaultValue = "None"
-                    ),
-                    @ApiImplicitParam(
-                            name = "phone number",
-                            value = "사용자 전화번호",
-                            required = true,
-                            dataType = "String",
-                            paramType = "body",
-                            defaultValue = "None"
-                    )
-            }
-    )
-    @PostMapping("/findpassword")
-    public ResultForm findPassword(@RequestBody FindPasswordForm form){
-        return userService.findPassword(form.getName(),form.getEmail());
-    }
 
     @ApiOperation(
             value = "edit password",

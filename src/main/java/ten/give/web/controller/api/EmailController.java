@@ -1,4 +1,4 @@
-package ten.give.web.controller;
+package ten.give.web.controller.api;
 
 import io.swagger.annotations.*;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +12,7 @@ import ten.give.web.service.EmailService;
 @RequiredArgsConstructor
 @RestController
 @Api(tags = "EmailController")
-@RequestMapping("/email")
+@RequestMapping("/api/email")
 public class EmailController {
 
     private final EmailService emailService;
@@ -38,6 +38,7 @@ public class EmailController {
         return emailService.sendEmail(form.getToEmail());
 
     }
+
 
 
 }
