@@ -13,6 +13,9 @@ import ten.give.web.form.EmailResultForm;
 import ten.give.web.form.SendEmailForm;
 import ten.give.web.service.EmailService;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 @Slf4j
 @RequiredArgsConstructor
 @Controller
@@ -23,6 +26,7 @@ public class ViewEmailController {
 
     @PostMapping("/sendemail")
     public String sendEmail(@ModelAttribute SendEmailForm form, Model model){
+
         model.addAttribute("token",emailService.sendEmail(form.getToEmail()));
         log.info("auth name : {} , email : {}" , form.getName(),form.getToEmail());
         model.addAttribute("form",form);

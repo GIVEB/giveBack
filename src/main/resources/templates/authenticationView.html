@@ -168,7 +168,7 @@
                         <input id="targetToken" type="hidden" th:value="*{token}">
                         <input id="tokenExpireTime" type="hidden" th:value="*{expireTime}">
                         <input id="tokenCreateTime" type="hidden" th:value="*{createTime}">
-                        
+
                         <div class="row align-items-center justify-content-center">
                             <input id="inputToken" type="text" class="input-underline input-text" name="token" placeholder="인증 번호 "><br>
                         </div>
@@ -178,7 +178,7 @@
                     <form id="hiddenForm" th:object="${form}" method="post" action="/view/users/findpassword">
                         <input id="formName" type="hidden" th:field="*{name}" th:value="*{name}">
                         <input id="formMail" type="hidden" th:field="*{toEmail}" th:value="*{toEmail}">
-                        <input id="d" type="text" th:field="*{toEmail}" th:value="*{toEmail}" disabled>
+                        <input id="d" type="hidden" th:field="*{toEmail}" th:value="*{toEmail}" disabled>
                     </form>
 
                     <div class="row align-items-center justify-content-center">
@@ -206,11 +206,16 @@
             </div>
         </footer>
 
+
+
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
                 integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
                 crossorigin="anonymous"></script>
 
     <script>
+
+
+
         function checkToken(){
 
             const $targetTokenValue = document.getElementById('targetToken');
@@ -236,7 +241,6 @@
             }
 
             if ($targetTokenValue.value == $inputTokenValue.value){
-                alert("ok");
                 $HIDDENFORM.submit();
             }else {
                 alert("본인 인증 실패!! Token을 확인 해 주세요!");
