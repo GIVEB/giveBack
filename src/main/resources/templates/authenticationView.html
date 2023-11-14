@@ -161,13 +161,14 @@
                     </div>
 
                     <div class="container" th:object="${token}">
-                        <p th:field="*{token}" th:text="*{token}"></p>
+                        <!--<p th:field="*{token}" th:text="*{token}"></p>
                         <p th:field="*{expireTime}" th:text="*{expireTime}"></p>
-                        <p th:field="*{createTime}" th:text="*{createTime}"></p>
+                        <p th:field="*{createTime}" th:text="*{createTime}"></p>-->
 
                         <input id="targetToken" type="hidden" th:value="*{token}">
                         <input id="tokenExpireTime" type="hidden" th:value="*{expireTime}">
                         <input id="tokenCreateTime" type="hidden" th:value="*{createTime}">
+                        
                         <div class="row align-items-center justify-content-center">
                             <input id="inputToken" type="text" class="input-underline input-text" name="token" placeholder="인증 번호 "><br>
                         </div>
