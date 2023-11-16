@@ -48,7 +48,13 @@ public class ViewUserController {
         return "loginForm";
     }
 
+    @ResponseBody
     @PostMapping("/login")
+    public String login(@ModelAttribute LoginForm form) {
+        return loginService.login(form.getLoginEmail(),form.getLoginPassword());
+    }
+
+    //@PostMapping("/login")
     public String login(@Validated @ModelAttribute("form") LoginForm form, BindingResult bindingResult, Model model, HttpServletResponse response) throws UnsupportedEncodingException {
 
         if (bindingResult.hasErrors()) {
