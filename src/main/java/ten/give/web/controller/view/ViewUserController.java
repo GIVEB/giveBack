@@ -3,11 +3,15 @@ package ten.give.web.controller.view;
 import io.swagger.annotations.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.support.RequestContextUtils;
 import ten.give.domain.entity.user.User;
 import ten.give.domain.exception.NoSuchTargetException;
 import ten.give.domain.exception.form.ResultForm;
@@ -16,7 +20,13 @@ import ten.give.web.service.FollowService;
 import ten.give.web.service.LoginService;
 import ten.give.web.service.UserService;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.Map;
 import java.util.Optional;
 
 @Slf4j
@@ -25,33 +35,52 @@ import java.util.Optional;
 @RequestMapping("/view/users")
 public class ViewUserController {
 
+    @Value("${email.expireTime}")
+    private int expireTime;
+
     private final LoginService loginService;
     private final UserService userService;
     private final FollowService followService;
 
     @GetMapping("/login")
-    public String loginForm(@ModelAttribute LoginForm form) {
+    public String loginForm(@ModelAttribute LoginForm form, Model model) {
+        model.addAttribute("form",form);
         return "loginForm";
     }
 
     @PostMapping("/login")
-    public String login(@Valid @ModelAttribute LoginForm form, BindingResult bindingResult) {
-
-        log.info("loginId : {} , loginPassword : {} " , form.getLoginEmail(), form.getLoginPassword());
+    public String login(@Validated @ModelAttribute("form") LoginForm form, BindingResult bindingResult, Model model, HttpServletResponse response) throws UnsupportedEncodingException {
 
         if (bindingResult.hasErrors()) {
-            log.info("in binding Error");
-            return "redirect:/view/users/login";
+            return "loginForm";
         }
 
         String token = loginService.login(form.getLoginEmail(), form.getLoginPassword());
 
         if (token == null) {
-            bindingResult.reject("loginFail", "아이디 또는 비밀번호가 맞지 않습니다.");
-            return "redirect:/view/users/login";
+            bindingResult.reject("loginFail", "존재하지 않는 유저입니다.");
         }
-        //로그인 성공 처리 TODO
-        return "redirect:/";
+
+        if (bindingResult.hasErrors()) {
+            log.info("errors={}", bindingResult);
+            return "loginForm";
+        }
+
+        model.addAttribute("loginUser", userService.getUserByEmail(form.getLoginEmail()).get());
+        model.addAttribute("token", token);
+
+        String jwt = "Bearer " + token;
+        jwt = URLEncoder.encode(jwt, "utf-8");
+        log.info("token : {}" ,token);
+        log.info("jwt : {} " , jwt);
+        Cookie cookie = new Cookie("jwt",jwt);
+        cookie.setMaxAge(expireTime * 1000);
+        cookie.setPath("/");
+        cookie.setHttpOnly(false);
+        cookie.setSecure(false);
+        response.addCookie(cookie);
+
+        return "loginHome";
     }
 
     @GetMapping("/join1")
@@ -60,7 +89,28 @@ public class ViewUserController {
     }
 
     @GetMapping("/join2")
-    public String joinForm2(@ModelAttribute JoinForm form){
+    public String joinForm2(@ModelAttribute JoinForm form,@RequestParam(required = false) Boolean duple,Model model,HttpServletRequest request){
+
+        model.addAttribute("form",form);
+
+        log.info("duple : {}" , duple);
+
+        model.addAttribute("duple", duple);
+
+        Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
+
+        if(flashMap == null) {
+            model.addAttribute("tokenForm",null);
+            return "joinForm2";
+        }
+        String email = (String)flashMap.get("email");
+        if(email != null){
+            model.addAttribute("form",form);
+        }
+        EmailResultForm tokenForm = (EmailResultForm)flashMap.get("tokenForm");
+        if(tokenForm != null){
+            model.addAttribute("tokenForm",tokenForm);
+        }
         return "joinForm2";
     }
 
@@ -74,19 +124,16 @@ public class ViewUserController {
         return userService.joinUser(form);
     }
 
-
     @PostMapping("/withdrawal")
     public String withdrawal(Authentication authentication){
         userService.withdrawal(Long.valueOf(authentication.getName()));
         return "redirect:/";
     }
 
-
     @GetMapping("/findemail")
     public String findEmailForm(@ModelAttribute FindEmailForm form){
         return "findEmail";
     }
-
 
     @PostMapping("/findemail")
     public String findEmail(@ModelAttribute FindEmailForm form, Model model){
@@ -118,9 +165,24 @@ public class ViewUserController {
 
     @PostMapping("/findpassword")
     public String findPassword(@ModelAttribute SendEmailForm form, Model model){
-        log.info("name : {} , email : {}" , form.getName(), form.getToEmail());
         model.addAttribute("newPassword",userService.findPassword(form.getName(),form.getToEmail()));
         return "findPasswordResult";
+    }
+
+    @GetMapping("/userCheck")
+    public String userCheck(@RequestParam String email, RedirectAttributes redirectAttributes, HttpServletRequest request){
+
+        Optional<User> userByEmail = userService.getUserByEmail(email);
+
+        redirectAttributes.addAttribute("email",email);
+
+        if(!userByEmail.isEmpty()){
+            redirectAttributes.addAttribute("duple",true);
+            return "redirect:/view/users/join2";
+        }
+
+        redirectAttributes.addAttribute("duple",false);
+        return "redirect:/view/users/join2";
     }
 
     // 손봐야 함
@@ -142,7 +204,6 @@ public class ViewUserController {
         return userInfoForm;
 
     }
-
 
     @ApiOperation(
             value = "User information edit",
@@ -207,11 +268,8 @@ public class ViewUserController {
     )
     @PostMapping("/editpassword")
     public ResultForm editPassword(@RequestBody PasswordEditForm editPassword, Authentication authentication){
-        log.info("password : {} ",editPassword.getEditPassword());
         return userService.editPassword(Long.valueOf(authentication.getName()),editPassword.getEditPassword());
     }
-
-
 
     /*// coolSMS 구현 로직 연결
     @GetMapping("/sendemail")

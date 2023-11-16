@@ -2,15 +2,30 @@
 <html>
 
 <head>
-  <link href="StyleForm.css" rel="stylesheet">
-  <link href="RadioButton.css" rel="stylesheet">
   <meta charset="utf-8">
-  <script src="http://code.jquery.com/jquery-latest.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
   <style>
+
+    a{
+      text-decoration: none;
+      color: black;
+    }
+
+    body{
+      height: 938px;
+    }
+
+    #signUpBtn{
+      transition: 1s;
+    }
+
+    #signUpBtn:hover{
+      background: #ffff;
+      border: 1px solid blue;
+      color: black;
+    }
+
     #modalBackground {
       text-align: center;
       position: fixed;
@@ -184,31 +199,45 @@
   <div class="circleRightS"></div>
   <div class="circleRightM"></div>
 
-  <div class="header">
-    <div class="row align-items-center">
-      <div class="col-7 ms-5">
-        <img src="img/Main_title.png" alt="#" width="140" height="140">
+  <div class="container">
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+      <div class="col-md-3 mb-2 mb-md-0">
+        <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
+          GIVE
+        </a>
       </div>
-      <div class="col-4">
-        <a class="col-1 menufont" href="Event.html">이벤트</a>
-        <a class="col-1 menufont" href="InQuiry.html">문의</a>
-        <a class="col-2 menufont" href="ViewMyAccount.html">마이페이지</a>
+
+      <div class="col-md-3 text-end mr-3">
+        <button id="signUpBtn" type="button" class="btn btn-primary" onclick="location.replace('/view/users/join1')">Sign-up</button>
       </div>
+    </header>
+  </div>
+
+
+  <div class="container">
+    <div class="row justify-center">
+
+      <div class="col-10 fs-3 mt-2">헌혈증 선택</div>
+
+      <div class="col-2">
+        <!-- Example split danger button -->
+        <div class="btn-group">
+          <button type="button" class="btn btn-danger">정 렬</button>
+          <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+            <span class="visually-hidden">Toggle Dropdown</span>
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">최근 순</a></li>
+            <li><a class="dropdown-item" href="#">오래된 순</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">헌혈종류</a></li>
+          </ul>
+        </div>
+      </div>
+
     </div>
   </div>
 
-  <div class="row">
-    <div style="text-align: left; margin-left: 270px;" class="col-2 fs-3 mt-2 mb-5">헌혈증 선택</div>
-    <div class="col-5"></div>
-    <div class="col-1 mt-2 mb-5 me-3">
-      <select class="form-select" aria-label="view_Filter">
-        <option value="new" selected>최근 순</option>
-        <option value="old">오래된 순</option>
-        <option value="kind">헌혈종류</option>
-      </select>
-    </div>
-
-  </div>
 
   <section>
     <div class="wrapList">
@@ -239,153 +268,25 @@
       </div>
       <!--여기까지-->
 
-      <div class="list_item">
-        <div class="row">
-          <div style="font-size: 18px; font-weight: bold; width: 110px; margin-top: 11px;" class="col-3 ms-3">헌혈증서</div>
-          <div style="border-radius: 10px; background-color: white; height: 32px; top: 10px; width: 190px;"
-            class="col-6 row mt-2">
-            <div class="col-4 row-cols-1">
-              <div style="font-size: 12px; line-height: 90%; text-align: left; margin-top: 6px; 
-                font-weight: bold;" class="col-12">증서</div>
-              <div style="font-size: 12px; line-height: 90%; text-align: left; font-weight: bold;" class="col-12">번호
-              </div>
-            </div>
-            <div style="font-size: 14px; margin-top: 6px;" class="col-8 list_text">12-34-56789</div>
-          </div>
-        </div>
-        <div class="row list_item_form">
-          <div class="col-4 mt-2 list_text text-end">헌혈종류:</div>
-          <div class="col-7 mt-2 list_text">전혈 320mL</div>
-          <div class="col-4 list_text text-end">헌혈일자:</div>
-          <div class="col-7 list_text">2023.10.25</div>
-          <div class="col-4 list_text text-end">혈액원명:</div>
-          <div class="col-7 list_text">대전.세종.충남&nbsp혈액원</div>
-        </div>
-      </div>
-
-      <div class="list_item">
-        <div class="row">
-          <div style="font-size: 18px; font-weight: bold; width: 110px; margin-top: 11px;" class="col-3 ms-3">헌혈증서</div>
-          <div style="border-radius: 10px; background-color: white; height: 32px; top: 10px; width: 190px;"
-            class="col-6 row mt-2">
-            <div class="col-4 row-cols-1">
-              <div style="font-size: 12px; line-height: 90%; text-align: left; margin-top: 6px; 
-                font-weight: bold;" class="col-12">증서</div>
-              <div style="font-size: 12px; line-height: 90%; text-align: left; font-weight: bold;" class="col-12">번호
-              </div>
-            </div>
-            <div style="font-size: 14px; margin-top: 6px;" class="col-8 list_text">12-34-56789</div>
-          </div>
-        </div>
-        <div class="row list_item_form">
-          <div class="col-4 mt-2 list_text text-end">헌혈종류:</div>
-          <div class="col-7 mt-2 list_text">전혈 320mL</div>
-          <div class="col-4 list_text text-end">헌혈일자:</div>
-          <div class="col-7 list_text">2023.10.25</div>
-          <div class="col-4 list_text text-end">혈액원명:</div>
-          <div class="col-7 list_text">대전.세종.충남&nbsp혈액원</div>
-        </div>
-      </div>
-
-      <hr>
-
-      <div class="list_item">
-        <div class="row">
-          <div style="font-size: 18px; font-weight: bold; width: 110px; margin-top: 11px;" class="col-3 ms-3">헌혈증서</div>
-          <div style="border-radius: 10px; background-color: white; height: 32px; top: 10px; width: 190px;"
-            class="col-6 row mt-2">
-            <div class="col-4 row-cols-1">
-              <div style="font-size: 12px; line-height: 90%; text-align: left; margin-top: 6px; 
-                font-weight: bold;" class="col-12">증서</div>
-              <div style="font-size: 12px; line-height: 90%; text-align: left; font-weight: bold;" class="col-12">번호
-              </div>
-            </div>
-            <div style="font-size: 14px; margin-top: 6px;" class="col-8 list_text">12-34-56789</div>
-          </div>
-        </div>
-        <div class="row list_item_form">
-          <div class="col-4 mt-2 list_text text-end">헌혈종류:</div>
-          <div class="col-7 mt-2 list_text">전혈 320mL</div>
-          <div class="col-4 list_text text-end">헌혈일자:</div>
-          <div class="col-7 list_text">2023.10.25</div>
-          <div class="col-4 list_text text-end">혈액원명:</div>
-          <div class="col-7 list_text">대전.세종.충남&nbsp혈액원</div>
-        </div>
-      </div>
-
-      <div class="list_item">
-        <div class="row">
-          <div style="font-size: 18px; font-weight: bold; width: 110px; margin-top: 11px;" class="col-3 ms-3">헌혈증서</div>
-          <div style="border-radius: 10px; background-color: white; height: 32px; top: 10px; width: 190px;"
-            class="col-6 row mt-2">
-            <div class="col-4 row-cols-1">
-              <div style="font-size: 12px; line-height: 90%; text-align: left; margin-top: 6px; 
-                font-weight: bold;" class="col-12">증서</div>
-              <div style="font-size: 12px; line-height: 90%; text-align: left; font-weight: bold;" class="col-12">번호
-              </div>
-            </div>
-            <div style="font-size: 14px; margin-top: 6px;" class="col-8 list_text">12-34-56789</div>
-          </div>
-        </div>
-        <div class="row list_item_form">
-          <div class="col-4 mt-2 list_text text-end">헌혈종류:</div>
-          <div class="col-7 mt-2 list_text">전혈 320mL</div>
-          <div class="col-4 list_text text-end">헌혈일자:</div>
-          <div class="col-7 list_text">2023.10.25</div>
-          <div class="col-4 list_text text-end">혈액원명:</div>
-          <div class="col-7 list_text">대전.세종.충남&nbsp혈액원</div>
-        </div>
-      </div>
-
-      <div class="list_item">
-        <div class="row">
-          <div style="font-size: 18px; font-weight: bold; width: 110px; margin-top: 11px;" class="col-3 ms-3">헌혈증서</div>
-          <div style="border-radius: 10px; background-color: white; height: 32px; top: 10px; width: 190px;"
-            class="col-6 row mt-2">
-            <div class="col-4 row-cols-1">
-              <div style="font-size: 12px; line-height: 90%; text-align: left; margin-top: 6px; 
-                font-weight: bold;" class="col-12">증서</div>
-              <div style="font-size: 12px; line-height: 90%; text-align: left; font-weight: bold;" class="col-12">번호
-              </div>
-            </div>
-            <div style="font-size: 14px; margin-top: 6px;" class="col-8 list_text">12-34-56789</div>
-          </div>
-        </div>
-        <div class="row list_item_form">
-          <div class="col-4 mt-2 list_text text-end">헌혈종류:</div>
-          <div class="col-7 mt-2 list_text">전혈 320mL</div>
-          <div class="col-4 list_text text-end">헌혈일자:</div>
-          <div class="col-7 list_text">2023.10.25</div>
-          <div class="col-4 list_text text-end">혈액원명:</div>
-          <div class="col-7 list_text">대전.세종.충남&nbsp혈액원</div>
-        </div>
-      </div>
-
     </div>
-    <footer class="footer">
-      <h3 style="padding:10px;">기브</h3>
-      <div class="row">
-        <div class="col-3"></div>
-        <div class="col-2"><button class="customer-center-btn">헌혈의 집 찾기</button></div>
-        <div class="col-2"><button class="customer-center-btn">고객센터</button></div>
-        <div class="col-2"><button class="customer-center-btn">레드커넥트</button></div>
-        <div class="col-3"></div>
-      </div>
-      <div class="row">
-        <div class="col-3"></div>
-        <div class="col-9" style="text-align:left;">
-          <p class="source_text">[26465]강원특별자치도 원주시 혁신로 50 대한적십자사 혈액관리본부</p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-3"></div>
-        <div class="col-9" style="text-align:left;">
-          <p class="source_text">COPYRIGHT(C) GIVE ALL RIGHTS RESERVED.</p>
-        </div>
-      </div>
-    </footer>
 
   </section>
+
+  <footer class="container footer">
+    <hr>
+    <div class="row justify-content-center text-center">
+      <div class="col-3"></div>
+      <div class="col-2"><a href="https://www.bloodinfo.net/knrcbs/bh/hous/srchBldHousList.do?mi=1059" class="customer-center-btn">헌혈의 집 찾기</a></div>
+      <div class="col-2"><a href="https://www.bloodinfo.net/knrcbs/na/ntt/selectNttList.do?mi=1068&bbsId=1101" class="customer-center-btn">고객센터</a></div>
+      <div class="col-2"><a href="https://www.bloodinfo.net/knrcbs/cm/cntnts/cntntsView.do?mi=1125&cntntsId=1014" class="customer-center-btn">레드커넥트</a></div>
+      <div class="col-3 mt-5"></div>
+    </div>
+    <div class="row">
+      <div class="col-3"></div>
+      <hr>
+      <div class="col-9"><p class="source_text">Copyright(C).2023.GIVE.All rights reserved.</p></div>
+    </div>
+  </footer>
 
   <!-- DonorCardModal -->
   <div id="modalBackground" class="d-none">
@@ -512,11 +413,28 @@
       $donorWrapper.classList.add('d-none');
       $ModalBack.classList.add('d-none');
     }
+
+    document.addEventListener("DOMContentLoaded", function(){
+        getCookie('jwt');
+    });
+
+    function getCookie(cName) {
+      cName = cName + '=';
+      var cookieData = document.cookie;
+      var start = cookieData.indexOf(cName);
+      var cValue = '';
+      if(start != -1){
+        start += cName.length;
+        var end = cookieData.indexOf(';', start);
+        if(end == -1)end = cookieData.length;
+        cValue = cookieData.substring(start, end);
+      }
+      return unescape(cValue);
+    }
+
   </script>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
 </body>
 

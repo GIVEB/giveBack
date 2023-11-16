@@ -70,7 +70,8 @@
             }
 
             #loginHeader{
-                font-size: 50px;
+                font-size: 30px;
+                font-weight: bolder;
             }
 
             #contents{
@@ -90,6 +91,12 @@
                 background: #ffff;
                 border: 1px solid blue;
                 color: black;
+            }
+
+            input[type="number"]::-webkit-outer-spin-button,
+            input[type="number"]::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
             }
 
         </style>
@@ -170,7 +177,7 @@
                         <input id="tokenCreateTime" type="hidden" th:value="*{createTime}">
 
                         <div class="row align-items-center justify-content-center">
-                            <input id="inputToken" type="text" class="input-underline input-text" name="token" placeholder="인증 번호 "><br>
+                            <input id="inputToken" type="number" max="9999" min="0" maxlength="4" class="input-underline input-text" name="token" placeholder="인증 번호 "><br>
                         </div>
 
                     </div>

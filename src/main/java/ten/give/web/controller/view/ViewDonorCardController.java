@@ -22,16 +22,23 @@ public class ViewDonorCardController {
     private final DonorCardService cardService;
 
     @GetMapping
-    public String donorcardView(Authentication authentication, Model model) {
+    public String donorcardView(Authentication authentication, Model model,@CookieValue(value = "jwt",required = false) String jwt) {
 
         // 관리자 권한인 2L 이 아니면 , 수정 필요
         /*if (Long.valueOf(authentication.getName()) != admin){
             return "redirect:/";
         }*/
 
+        log.info("jwt : {}", jwt);
+
         model.addAttribute("cardList", cardService.getCardList());
 
         return "cardListView";
+    }
+
+    @GetMapping("donorcardList")
+    public String cardList(){
+        return "cardList";
     }
 
 

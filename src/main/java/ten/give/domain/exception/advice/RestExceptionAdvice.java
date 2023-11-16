@@ -3,7 +3,6 @@ package ten.give.domain.exception.advice;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -11,14 +10,14 @@ import ten.give.domain.exception.NoSuchTargetException;
 import ten.give.domain.exception.form.ExErrorResult;
 
 @Slf4j
-@ControllerAdvice
-public class ExceptionAdvice {
+@RestControllerAdvice
+public class RestExceptionAdvice {
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(HttpMessageNotReadableException.class)
-    public String NoAuthenticationExHandle(Exception e){
+    public ExErrorResult NoAuthenticationExHandle(Exception e){
         log.error("[exceptionHandle] ex", e);
-        return "redirect:/view/users/login";
+        return new ExErrorResult("Bad" , e.getMessage());
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)

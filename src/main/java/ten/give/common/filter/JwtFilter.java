@@ -1,4 +1,4 @@
-package ten.give.common.config;
+package ten.give.common.filter;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -73,7 +73,6 @@ public class JwtFilter extends OncePerRequestFilter {
             // userId Token 에서 꺼내기
             Long userId = JwtUtils.getUserId(token,secretKey);
             log.info("filter userId : {} ", userId);
-
 
             //권한 부여
             //List.of(new SimpleGrantedAuthority("USER")) : DB 에서 지정한 Role 을 넣어줌

@@ -57,7 +57,7 @@
 
             .input-underline{
                 border-style: none;
-                border-bottom: 1px solid darkgray;
+                border-bottom: 0.5px solid dimgray;
                 outline: none;
                 font-size: 20px;
                 margin-bottom: 20px;
@@ -70,7 +70,8 @@
             }
 
             #loginHeader{
-                font-size: 50px;
+                font-size: 30px;
+                font-weight: bold;
             }
 
             #contents{
@@ -230,6 +231,20 @@
 
             }
 
+            function phone_check(phone) {
+
+                var reg = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+
+                return reg.test(email);
+
+            }
+
+            $inputTel.addEventListener('input',()=>{
+                if($inputTel.value.length == 3 || $inputTel.value.length == 8){
+                    $inputTel.value += '-';
+                }
+                console.log("dd")
+            })
 
         </script>
     </body>

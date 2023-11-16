@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport"
@@ -53,11 +53,12 @@
             
             .input-text {
                 width:350px;
+
             }
 
             .input-underline{
                 border-style: none;
-                border-bottom: 1px solid darkgray;
+                border-bottom: 0.5px solid dimgray;
                 outline: none;
                 font-size: 20px;
                 margin-bottom: 20px;
@@ -70,7 +71,8 @@
             }
 
             #loginHeader{
-                font-size: 50px;
+                font-size: 30px;
+                font-weight: bolder;
             }
 
             #contents{
@@ -90,6 +92,10 @@
                 background: #ffff;
                 border: 1px solid blue;
                 color: black;
+            }
+
+            .field-error{
+                color: #FE0000;
             }
 
         </style>
@@ -155,17 +161,23 @@
             <div class="card" style="width: 50rem; height: 25rem;">
                 <div class="card-body">
                     <div class="container">
-                        <form id="loginForm" class="login-form" action="/view/users/login" method="post">
+                        <form id="loginForm" class="login-form" action="/view/users/login" method="post" th:object="${form}">
                             <div class="d-flex row justify-content-center">
                                 <p></p>
                                 <p id="loginHeader" class="col-4 text-center">로그인</p>
                                 <p></p>
                             </div>
-                            <div class="row align-items-center justify-content-center">
-                                <input id="inputEmail" type="email" class="input-underline input-text" name="inputEmail" placeholder="이메일"><br>
+
+                            <div class="row align-items-center justify-content-center" th:if="${#fields.hasGlobalErrors()}">
+                                <p id="globalErrorMSG" class="field-error" th:each="err : ${#fields.globalErrors()}" th:text="${err}">글로벌 오류 메시지</p>
                             </div>
+
                             <div class="row align-items-center justify-content-center">
-                                <input id="inputPassword" type="password" class="input-underline input-text" name="inputPassword" placeholder="비밀번호"><br>
+                                <input id="inputEmail" type="email" class="input-underline input-text" th:field="*{loginEmail}" placeholder="이메일"><br>
+                            </div>
+
+                            <div class="row align-items-center justify-content-center">
+                                <input id="inputPassword" type="password" class="input-underline input-text" th:field="*{loginPassword}" placeholder="비밀번호"><br>
                             </div>
                             <div class="d-flex justify-content-center">
                                 <div class="row">
@@ -182,7 +194,6 @@
             </div>
         </div>
         </section>
-
 
         <footer class="container footer">
             <hr>
@@ -203,18 +214,51 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
                 integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
                 crossorigin="anonymous"></script>
-
         <script>
 
             const $inputEmail = document.getElementById('inputEmail');
             const $inputPassword = document.getElementById('inputPassword');
             const $loginForm = document.getElementById('loginForm');
+            const $globalErrorMSG = document.getElementById('globalErrorMSG');
+
+
+            $inputEmail.addEventListener('input',()=>{
+                $globalErrorMSG.innerText = '';
+            })
+
+            $inputPassword.addEventListener('input',()=>{
+                $globalErrorMSG.innerText = '';
+            })
 
             $inputPassword.addEventListener('focus',()=>{
                 if(!$inputEmail.value){
                     alert("아이디를 입력하세요!");
                     $inputEmail.focus();
                 }
+
+                if($inputEmail.value){
+                    if(!email_check($inputEmail.value)) {
+                        alert("e-mail 형식이 아닙니다.");
+                        $inputEmail.value = '';
+                        $inputEmail.focus();
+                    }
+                }
+
+            })
+
+            $inputPassword.addEventListener('focusout',()=>{
+                if($inputEmail.value){
+                    if(!email_check($inputEmail.value)) {
+                        alert("e-mail 형식이 아닙니다.");
+                        $inputEmail.value = '';
+                        $inputEmail.focus();
+                    }
+                }
+            })
+
+
+            $inputEmail.addEventListener('focusout',()=>{
+                email_check($inputEmail.value)
             })
 
             function login(){
@@ -226,13 +270,28 @@
                     alert("비밀번호를 입력해 주세요.");
                     $inputPassword.focus();
                 }else{
-                    $loginForm.submit();
+                    if(email_check($inputEmail.value)){
+                        $loginForm.submit();
+                    }else{
+                        alert("e-mail 형식이 아닙니다.");
+                        $inputEmail.value = '';
+                        $inputEmail.focus();
+                    }
                 }
 
             }
 
+            function email_check(email) {
+
+                var reg = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+
+                return reg.test(email);
+
+            }
 
         </script>
+
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     </body>
 </html>
