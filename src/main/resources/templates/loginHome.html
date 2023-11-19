@@ -30,11 +30,13 @@
                         </div>
                         <h4 class="mb-2">GIVE Project</h4>
 
-                        <div th:object="${loginUser}">
+                        <!--<div th:object="${loginUser}">
                             <p id="welcomeTxt" th:text="|*{name} 님 반갑습니다!|"></p>
-                        </div>
+                        </div>-->
 
-                        <p  id="tokenValue" class="text-muted mb-4" th:text="${token}" th:value="${token}"> </p>
+                        <div id="loginUser">
+                            <p id="welcomeTxt"> 님 반갑습니다. </p>
+                        </div>
 
                         <p class="text-muted mb-4">GIT<span class="mx-2">|</span> <a
                                 href="https://github.com/GIVEB/give">github.com/GIVEB/give</a></p>
@@ -59,15 +61,18 @@
 
 <script>
 
-    function moveCardList(){
-        const jwt = getCookie('jwt');
-        console.log(jwt);
-        var req = new XMLHttpRequest();
-        req.open("GET", "http://localhost:8080/view/donorcards", true);
-        req.setRequestHeader("Authorization", jwt);
-        req.send();
-        location.href = 'http://localhost:8080/view/donorcards';
-    }
+    const $welcomeTxt = document.getElementById('welcomeTxt');
+
+    window.addEventListener('DOMContentLoaded',() => {
+        fetch("http://localhost:8080/api/users/info",{
+            method: 'get',
+            headers: {
+                'content-type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem("jwt"),
+            }
+        }).then(res => res.json())
+            .then(json => $welcomeTxt.innerText = json.name + '님 반갑습니다!')
+    })
 
     function getCookie(cName) {
         cName = cName + '=';

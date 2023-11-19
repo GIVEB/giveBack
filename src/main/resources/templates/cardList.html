@@ -21,7 +21,7 @@
 
 
     function test(){
-        //const TOKEN = document.getElementById('tokenValue').value;
+        const TOKEN = localStorage.getItem("jwt");
         var httpRequest = new XMLHttpRequest();
         httpRequest.onreadystatechange = function() {
             if(httpRequest.readyState == XMLHttpRequest.DONE && httpRequest.status == 200) {

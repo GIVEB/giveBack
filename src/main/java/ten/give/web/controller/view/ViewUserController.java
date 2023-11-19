@@ -26,6 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -50,8 +51,11 @@ public class ViewUserController {
 
     @ResponseBody
     @PostMapping("/login")
-    public String login(@ModelAttribute LoginForm form) {
-        return loginService.login(form.getLoginEmail(),form.getLoginPassword());
+    public Map<String,String> login(@RequestBody LoginForm form) {
+        String login = loginService.login(form.getLoginEmail(), form.getLoginPassword());
+        Map<String,String> token = new HashMap<>();
+        token.put("token",login);
+        return token;
     }
 
     //@PostMapping("/login")

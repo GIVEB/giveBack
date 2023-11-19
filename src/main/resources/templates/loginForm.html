@@ -271,7 +271,22 @@
                     $inputPassword.focus();
                 }else{
                     if(email_check($inputEmail.value)){
-                        $loginForm.submit();
+                        fetch("http://localhost:8080/view/users/login", {
+                            method: 'post',
+                            headers: {
+                                'content-type': 'application/json'
+                            },
+                            body : JSON.stringify({
+                                loginEmail : $inputEmail.value,
+                                loginPassword : $inputPassword.value
+                            })
+                        }).then(res => res.json())
+                            .then(token => {
+                                const jwt = token.token;
+                                localStorage.setItem("jwt",jwt);
+                                alert("로그인 되었습니다");
+                                location.replace("http://localhost:8080/home");
+                            });
                     }else{
                         alert("e-mail 형식이 아닙니다.");
                         $inputEmail.value = '';
