@@ -283,9 +283,29 @@
                         }).then(res => res.json())
                             .then(token => {
                                 const jwt = token.token;
-                                localStorage.setItem("jwt",jwt);
-                                alert("로그인 되었습니다");
-                                location.replace("http://localhost:8080/home");
+
+                                if(jwt != null){
+                                    localStorage.setItem("jwt",jwt);
+                                    location.replace("http://localhost:8080/home");
+                                }else{
+                                    const Toast = Swal.mixin({
+                                        toast: true,
+                                        position: "top-end",
+                                        showConfirmButton: false,
+                                        timer: 3000,
+                                        timerProgressBar: true,
+                                        didOpen: (toast) => {
+                                            toast.onmouseenter = Swal.stopTimer;
+                                            toast.onmouseleave = Swal.resumeTimer;
+                                        }
+                                    });
+                                    Toast.fire({
+                                        icon: "error",
+                                        title: "로그인 실패!",
+                                        footer : "ID, PASSWORD 를 확인하세요."
+                                    });
+                                }
+
                             });
                     }else{
                         alert("e-mail 형식이 아닙니다.");

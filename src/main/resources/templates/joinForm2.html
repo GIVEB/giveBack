@@ -123,7 +123,7 @@
        }
 
        .btnl{
-           width: 9.5rem;
+           width: 10rem;
        }
 
        .signForm{
@@ -189,7 +189,40 @@
         }
 
         .birth{
-            width: 32%;
+            width: 31%;
+        }
+
+        #date{
+            width: 5%;
+        }
+
+        input[type=date]::-webkit-datetime-edit-text {
+            -webkit-appearance: none;
+            display: none;
+        }
+        input[type=date]::-webkit-datetime-edit-month-field{
+            -webkit-appearance: none;
+            display: none;
+        }
+        input[type=date]::-webkit-datetime-edit-day-field {
+            -webkit-appearance: none;
+            display: none;
+        }
+        input[type=date]::-webkit-datetime-edit-year-field {
+            -webkit-appearance: none;
+            display: none;
+        }
+
+        .after-duple{
+            display: none;
+        }
+
+        .after-auth{
+            display: none;
+        }
+
+        #name{
+            width: 50%;
         }
 
     </style>
@@ -255,37 +288,37 @@
                     <div class="signForm">
                     <form class="" action="/view/users/join" method="post" th:object="${form}">
 
+
                         <input id="inputEmail" th:field="*{email}" th:value="*{email}" class="join-input" type="email" placeholder="email Address"/>
-                        <span id="dupleTrue"  th:text="|이미 있는 email 입니다.|" th:if="${duple}" class="badge rounded-pill text-bg-danger">Duplication</span>
-                        <span id="dupleFalse"  th:text="|사용 가능 합니다.|" th:if="${duple == false}" class="badge rounded-pill text-bg-success">Duplication</span>
+                        <p id="dupleTrue"  text="이미 있는 email 입니다." class="text-danger d-none">duple</p>
+                        <p id="dupleFalse"  text="사용 가능 합니다." class="text-success d-none">duple</p>
                         <button type="button" onclick="duplicateTest()" class="check-btn w-100">중복 검사</button>
 
-                        <input type="text" th:field="*{name}" class="join-input" placeholder="이름" id="inputName"/>
-                        <input type="radio" th:field="*{gender}" class="btn-check" name="gender" id="gender1" value="M" autocomplete="off" checked>
-                        <label class="btn btnl btn-outline-success" for="gender1">남 자</label>
-                        <input type="radio" class="btn-check" th:field="*{gender}" name="gender" id="gender2" value="F" autocomplete="off">
-                        <label class="btn btnl btn-outline-danger" for="gender2">여 자</label>
+                        <input type="text" th:field="*{name}" th:value="*{name}"class="join-input after-duple" placeholder="이름" id="name"/>
+                        <input type="radio" th:field="*{gender}" class="btn-check after-duple" name="gender" id="gender1" value="M" autocomplete="off">
+                        <label id="gender1Label" class="btn btnl btn-outline-success after-duple" for="gender1">남 자</label>
+                        <input type="radio" class="btn-check after-duple" th:field="*{gender}" name="gender" id="gender2" value="F" autocomplete="off">
+                        <label id="gender2Label" class="btn btnl btn-outline-danger after-duple" for="gender2">여 자</label>
 
 
+                        <input id="inputToken" class="join-input d-none" type="number" maxlength="4" max="9999" placeholder="인증번호"/>
 
-                        <input id="inputToken" class="join-input" type="number" maxlength="4" max="9999" placeholder="인증번호"/>
-                        <span id="token" th:text="${tokenForm.token}" th:if="${tokenForm != null}" class="badge rounded-pill text-bg-danger">Duplication</span>
+                        <button type="button" class="check-btn d-none" id="sendMailBtn" onclick="sendMail()">인증번호 보내기</button>
+                        <button type="button" class="check-btn d-none" id="authBtn" onclick="auth()">인증 하기</button>
 
-                        <button type="button" th:if="${tokenForm == null} and ${duple == false}" class="check-btn" id="sendMailBtn" onclick="sendMail()">인증번호 보내기</button>
-                        <button type="button" th:if="${tokenForm != null}" class="check-btn" id="authBtn" onclick="auth()">인증 하기</button>
+                        <input id="password" type="password" th:field="*{password}" onchange="isSame()" class="join-input after-auth" placeholder="비밀번호 입력"/>
+                        <input id="checkpassword" type="password" class="join-input after-auth" onchange="isSame()" placeholder="비밀번호 재확인"/>
+                        <p id="same" class="d-none"></p>
 
-                        <input type="password" th:field="*{password}" class="join-input" placeholder="비밀번호 입력"/>
-                        <input type="password" class="join-input" placeholder="비밀번호 재확인"/>
+                        <input id="date" type="date" class="join-input after-auth" placeholder="" onchange="checkBirth()">
+                        <input type="text" th:field="*{birthYear}" class="join-input birth after-auth" placeholder="생년" id="birthYear"  disabled/>
+                        <input type="text" th:field="*{birthMonth}" class="join-input birth after-auth" placeholder="생월" id="birthMonth" disabled/>
+                        <input type="text" th:field="*{birthDay}" class="join-input birth after-auth"  placeholder="생일" id="birthDay" disabled/>
 
-
-                        <input type="text" th:field="*{birthYear}" class="join-input birth" placeholder="생년" id="birthY" />
-                        <input type="text" th:field="*{birthMonth}" class="join-input birth" placeholder="생월" id="birthM" />
-                        <input type="text" th:field="*{birthDay}" class="join-input birth" placeholder="생일" id="birthD" />
-
-                        <input type="tel" class="join-input" th:field="*{phone}" placeholder="전화번호 ex) 010-1234-5678" id="phone" />
-                        <input type="text" class="join-input" th:field="*{address}" placeholder="주소"/>
-                        <input type="text" class="join-input" th:field="*{addressDetail}" placeholder="상세주소"/>
-                        <div class="row align-center justify-content-center"><button id="joinBtn" type="submit" class="cert-me-btn">회원가입</button></div>
+                        <input type="tel" class="join-input after-auth" th:field="*{phone}" placeholder="전화번호 ex) 010-1234-5678" id="phone" />
+                        <input type="text" class="join-input after-auth" th:field="*{address}" id="address" placeholder="주소"/>
+                        <input type="text" class="join-input after-auth" th:field="*{addressDetail}" id="addressDetail" placeholder="상세주소"/>
+                        <div id="joinBtnWrapper" class="row align-center justify-content-center d-none"><button id="joinBtn" type="button" onclick="join()" class="cert-me-btn">회원가입</button></div>
                     </form>
                     </div>
                 </div>
@@ -321,52 +354,359 @@
             integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
             crossorigin="anonymous"></script>
 
-    <script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script th:inline="javascript">
+
+        let TOKEN = null;
 
         const $inputEmail = document.getElementById('inputEmail');
+        const $inputName = document.getElementById('name');
+        const $gender1 = document.getElementById('gender1');
+        const $gender2 = document.getElementById('gender2');
+        const $birthY = document.getElementById('birthYear');
+        const $birthM = document.getElementById('birthMonth');
+        const $birthD = document.getElementById('birthDay');
+        const $phone = document.getElementById('phone');
+        const $address = document.getElementById('address');
+        const $addressDetail = document.getElementById('addressDetail');
+        const $authBtn = document.getElementById('authBtn');
+        const $gender1Label = document.getElementById('gender1Label');
+        const $gender2Label = document.getElementById('gender2Label');
+
+        const $inputToken = document.getElementById('inputToken');
+
         const $LoadingImg = document.getElementById('loadingImg');
         const $sendMailBtn = document.getElementById('sendMailBtn');
+        const $dupleTrue = document.getElementById('dupleTrue');
+        const $dupleFalse = document.getElementById('dupleFalse');
+
+        const $checkpassword = document.getElementById('checkpassword');
+        const $password = document.getElementById('password');
+
+        const $same = document.getElementById('same');
+
+        const $date = document.getElementById('date');
+
+        const $joinBtn = document.getElementById('joinBtn');
+        const $joinBtnWrapper = document.getElementById('joinBtnWrapper');
+
+        let dupleFlag = false;
+
+        function setform(){
+            const form = [[${form}]];
+            form.email = $inputEmail.value;
+
+            form.name = $inputName.value;
+
+            if ($gender1.value != null){
+                form.gender = $gender1.value;
+            }else {
+                form.gender = $gender2.value;
+            }
+            form.password = $password.value;
+            form.birthYear = $birthY.value;
+            form.birthMonth = $birthM.value;
+            form.birthDay = $birthD.value;
+            form.phone = $phone.value;
+            form.address = $address.value;
+            form.addressDetail = $addressDetail.value;
+
+            return form;
+        }
 
 
         $LoadingImg.hidden=true;
 
-        function duplicateTest(){
-
-            const inputEmail = $inputEmail.value;
-
-            if(!inputEmail){
-                alert("email을 입력하세요.");
+        $inputEmail.addEventListener('focusout', () =>{
+            if(!email_check($inputEmail.value)){
+                alert('email 형식이 아닙니다.');
+                $inputEmail.value = '';
                 $inputEmail.focus();
-            }else{
-                location.href='/view/users/userCheck?email=' + inputEmail;
             }
+        })
+
+        $inputEmail.addEventListener('change',()=>{
+            dupleFlag = false;
+        })
+
+        function duplicateTest(){
+            const setForm = setform();
+            fetch("http://localhost:8080/view/users/userCheck", {
+                method: 'post',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body : JSON.stringify(setForm)
+            }).then((response) => response.json())//읽어온 데이터를 json으로 변환
+                .then((json) => {
+                    if (json['duple']){
+                        $dupleTrue.innerText = "이미 가입된 email 입니다.";
+                        $dupleTrue.classList.remove('d-none');
+                        $dupleFalse.classList.add('d-none');
+                    }else{
+                        $dupleFalse.innerText = "사용 가능한 email 입니다.";
+                        $dupleFalse.classList.remove('d-none');
+                        $dupleTrue.classList.add('d-none');
+                        $sendMailBtn.innerText = '인증번호 보내기';
+                        $sendMailBtn.classList.remove('d-none');
+
+                        dupleFlag = true;
+
+                        $inputName.classList.remove('after-duple');
+                        $gender1.classList.remove('after-duple');
+                        $gender2.classList.remove('after-duple');
+                        $gender1Label.classList.remove('after-duple');
+                        $gender2Label.classList.remove('after-duple');
+                    }
+                })
+
 
         }
 
-        function auth(){
 
+
+        function auth(){
+            if (TOKEN != null){
+                if (TOKEN == $inputToken.value){
+                    $authBtn.classList.add('d-none');
+                    $inputToken.classList.add('d-none');
+                    $sendMailBtn.classList.add('d-none');
+
+                    Toast.fire({
+                        icon: "success",
+                        title: "인증 성공!"
+                    });
+
+                    $birthY.classList.remove('after-auth');
+                    $birthM.classList.remove('after-auth');
+                    $birthD.classList.remove('after-auth');
+                    $phone.classList.remove('after-auth');
+                    $password.classList.remove('after-auth');
+                    $checkpassword.classList.remove('after-auth');
+                    $address.classList.remove('after-auth');
+                    $addressDetail.classList.remove('after-auth');
+                    $date.classList.remove('after-auth');
+
+                    $joinBtnWrapper.classList.remove('d-none');
+
+                }else{
+                    $sendMailBtn.innerText = '재 발급';
+                    $sendMailBtn.classList.remove('d-none');
+
+                    Toast.fire({
+                        icon: "error",
+                        title: "인증 실패!"
+                    });
+
+                }
+            }
 
         }
 
         function sendMail(){
 
-            const inputEmail = $inputEmail.value;
+            $LoadingImg.hidden=false;
 
-            if(!inputEmail){
+            const setForm = setform();
+
+            let token = null;
+
+            if(!$inputEmail.value){
                 alert("Email 주소를 먼저 입력해 주세요.");
                 $inputEmail.focus();
                 return;
             }
 
-            const url = '/view/email/sendmail?email=' + inputEmail;
-            let sendMailForm = document.createElement('form');
-            sendMailForm.setAttribute('method','post');
-            sendMailForm.setAttribute('action', url);
-            document.body.appendChild(sendMailForm);
-            $LoadingImg.hidden=false;
-            sendMailForm.submit();
+            fetch("http://localhost:8080/view/email/sendmail", {
+                method: 'post',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body : JSON.stringify(setForm)
+            }).then((response) => response.json())//읽어온 데이터를 json으로 변환
+                .then((json) => {
+                    if (json){
+                        token = json['token'];
+                        TOKEN = token;
+                        $sendMailBtn.classList.add('d-none');
+                        $authBtn.classList.remove('d-none');
+                    }
+                })
+
+            setTimeout(() => loadingImgHidden(), 5000);
+            $inputToken.classList.remove('d-none');
+
         }
 
+        function loadingImgHidden(){
+            $LoadingImg.hidden=true;
+        }
+
+        function email_check(email) {
+
+            var reg = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+
+            return reg.test(email);
+
+        }
+
+        $checkpassword.addEventListener('focus',() => {
+            if(!$password.value){
+                alert('비밀 번호를 입력하세요.');
+                $password.focus();
+            }
+        })
+
+        function isSame(){
+
+            if($password.value.length < 6 || $checkpassword.value.length > 16){
+                window.alert('비밀번호는 6글자 이상, 16글자 이하만 이용 가능합니다.');
+                $password.value='';
+                $checkpassword.value='';
+                $password.focus();
+                $same.classList.add('d-none');
+            }
+
+            if($password.value!='' && $checkpassword.value!=''){
+                if($password.value==$checkpassword.value){
+                    $same.innerHTML='비밀번호가 일치합니다.';
+                    $same.style.color='green';
+                    $same.classList.remove('d-none');
+                    $checkpassword.style.border = '1px green solid';
+                    $password.style.border = '1px green solid';
+                }else{
+                    $same.innerHTML='비밀번호가 일치하지 않습니다.';
+                    $same.style.color='red';
+                    $same.classList.remove('d-none');
+                    $checkpassword.style.border = '1px red solid';
+                    $password.style.border = '1px red solid';
+                }
+            }else{
+                $same.classList.add('d-none');
+                $checkpassword.style.border = 'none';
+                $password.style.border = 'none';
+                $checkpassword.style.borderBottom = '1px solid #D9D9D9';
+                $password.style.borderBottom = '1px solid #D9D9D9';
+            }
+
+        }
+
+        $password.addEventListener('focus',() => {
+            $password.value = '';
+        })
+
+        $checkpassword.addEventListener('focus',() => {
+            $checkpassword.value = '';
+        })
+
+
+        function checkBirth(){
+
+            let inputDate = $date.value;
+
+            console.log(inputDate);
+
+            const dateToken = inputDate.split('-');
+
+            $birthY.value = dateToken[0];
+            $birthM.value = dateToken[1];
+            $birthD.value = dateToken[2];
+
+            const date = new Date();
+
+            const customDate = date.getFullYear() + '-' + (date.getMonth()+1) + '-' + date.getDate();
+
+            console.log(customDate);
+
+           if (customDate < inputDate){
+                alert('현재보다 미래일 수 없습니다.');
+               $birthY.value = '';
+               $birthM.value = '';
+               $birthD.value = '';
+                return;
+           }
+
+        }
+
+        $phone.addEventListener('input',()=>{
+            if($phone.value.length == 3 || $phone.value.length == 8){
+                $phone.value += '-';
+            }
+        })
+
+
+        function join(){
+
+            let form = setform();
+            console.log(form.email);
+
+            const condition = (!form.email) || (!form.name) || (!form.password) || (!form.birthYear) || (!form.birthMonth)
+                || (!form.birthDay) || (!form.phone) || (!form.gender) ;
+
+            console.log(condition);
+
+            if (!condition){
+
+                fetch("http://localhost:8080/view/users/join", {
+                    method: 'post',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body : JSON.stringify(form)
+                }).then((response) => response.json())//읽어온 데이터를 json으로 변환
+                    .then((json) => {
+                        console.log(json.result);
+                        if (json.result){
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: "top-end",
+                                showConfirmButton: false,
+                                timer: 3000,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                    toast.onmouseenter = Swal.stopTimer;
+                                    toast.onmouseleave = Swal.resumeTimer;
+                                }
+                            });
+                            Toast.fire({
+                                icon: "success",
+                                title: "회원 가입 완료!"
+                            });
+                        }
+                    })
+
+                location.replace('http://localhost:8080/view/users/login');
+
+            }else{
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "필수 데이터를 모두 채워 주세요!",
+                    footer: 'GIVE'
+                });
+            }
+
+
+        }
+
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+            }
+        });
+
+
+
+
     </script>
+
+
 </body>
 </html>

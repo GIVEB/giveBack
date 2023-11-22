@@ -11,11 +11,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ten.give.web.form.EmailResultForm;
+import ten.give.web.form.JoinForm;
 import ten.give.web.form.SendEmailForm;
 import ten.give.web.service.EmailService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
+import java.util.Map;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -33,13 +36,12 @@ public class ViewEmailController {
         return "authenticationView";
     }
 
+    @ResponseBody
     @PostMapping("/sendmail")
-    public String sendmail(@RequestParam String email, RedirectAttributes redirectAttributes,HttpServletRequest request){
-        log.info("sendMail Test : {} " , email);
-        redirectAttributes.addAttribute("email",email);
-        EmailResultForm tokenForm = emailService.sendEmail(email);
-        redirectAttributes.addFlashAttribute("tokenForm",tokenForm);
-        return "redirect:/view/users/join2";
+    public EmailResultForm sendmail(@RequestBody JoinForm form){
+        log.info("sendMail Test : {} " , form.getEmail());
+        EmailResultForm tokenForm = emailService.sendEmail(form.getEmail());
+        return tokenForm;
     }
 
 

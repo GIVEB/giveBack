@@ -59,6 +59,8 @@
     </div>
 </section>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script>
 
     const $welcomeTxt = document.getElementById('welcomeTxt');
@@ -71,7 +73,26 @@
                 'Authorization': 'Bearer ' + localStorage.getItem("jwt"),
             }
         }).then(res => res.json())
-            .then(json => $welcomeTxt.innerText = json.name + '님 반갑습니다!')
+            .then(json => {
+                console.log(json.name);
+                $welcomeTxt.innerText = json.name + '님 반갑습니다!';
+            })
+
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+            }
+        });
+        Toast.fire({
+            icon: "success",
+            title: "로그인 성공!"
+        });
     })
 
     function getCookie(cName) {

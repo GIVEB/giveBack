@@ -17,9 +17,11 @@ public class JoinForm {
     @ApiModelProperty(value = "ID 용 Email 주소", example = "test@test.com")
     private String email;
 
+    @NotNull
     @ApiModelProperty(value = "사용자 이름", example = "김실험")
     private String name;
 
+    @NotNull
     @ApiModelProperty(value = "사용자 비밀번호", example = "test!")
     private String password;
 
@@ -34,7 +36,7 @@ public class JoinForm {
     @ApiModelProperty(value = "생일", example = "11")
     private String birthDay;
 
-
+    @NotNull
     @ApiModelProperty(value = "핸드폰번호", example = "01012345678")
     private String phone;
 

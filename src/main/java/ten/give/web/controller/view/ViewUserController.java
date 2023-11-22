@@ -1,8 +1,11 @@
 package ten.give.web.controller.view;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.mapping.Join;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -52,9 +55,10 @@ public class ViewUserController {
     @ResponseBody
     @PostMapping("/login")
     public Map<String,String> login(@RequestBody LoginForm form) {
-        String login = loginService.login(form.getLoginEmail(), form.getLoginPassword());
+        log.info(form.getLoginEmail(), form.getLoginPassword());
+        String jwt = loginService.login(form.getLoginEmail(), form.getLoginPassword());
         Map<String,String> token = new HashMap<>();
-        token.put("token",login);
+        token.put("token",jwt);
         return token;
     }
 
@@ -99,7 +103,7 @@ public class ViewUserController {
     }
 
     @GetMapping("/join2")
-    public String joinForm2(@ModelAttribute JoinForm form,@RequestParam(required = false) Boolean duple,Model model,HttpServletRequest request){
+    public String joinForm2(@ModelAttribute JoinForm form, @RequestParam(required = false) Boolean duple,Model model,HttpServletRequest request){
 
         model.addAttribute("form",form);
 
@@ -113,9 +117,10 @@ public class ViewUserController {
             model.addAttribute("tokenForm",null);
             return "joinForm2";
         }
-        String email = (String)flashMap.get("email");
-        if(email != null){
-            model.addAttribute("form",form);
+
+        if(flashMap.get("form") != null){
+            log.info("form??");
+            model.addAttribute("form",(JoinForm)flashMap.get("form"));
         }
         EmailResultForm tokenForm = (EmailResultForm)flashMap.get("tokenForm");
         if(tokenForm != null){
@@ -129,8 +134,9 @@ public class ViewUserController {
         return "joinCompleView";
     }
 
+    @ResponseBody
     @PostMapping("/join")
-    public ResultForm join(@Valid @ModelAttribute JoinForm form){
+    public ResultForm join(@RequestBody JoinForm form){
         return userService.joinUser(form);
     }
 
@@ -179,20 +185,25 @@ public class ViewUserController {
         return "findPasswordResult";
     }
 
-    @GetMapping("/userCheck")
-    public String userCheck(@RequestParam String email, RedirectAttributes redirectAttributes, HttpServletRequest request){
+    @ResponseBody
+    @PostMapping("/userCheck")
+    public Map<String,Boolean> userCheck(@RequestBody JoinForm form){
 
-        Optional<User> userByEmail = userService.getUserByEmail(email);
+        Map<String,Boolean> result = new HashMap<>();
 
-        redirectAttributes.addAttribute("email",email);
+
+        log.info("form email : {} " , form.getEmail());
+
+        Optional<User> userByEmail = userService.getUserByEmail(form.getEmail());
+
 
         if(!userByEmail.isEmpty()){
-            redirectAttributes.addAttribute("duple",true);
-            return "redirect:/view/users/join2";
+            result.put("duple",true);
+            return result;
         }
 
-        redirectAttributes.addAttribute("duple",false);
-        return "redirect:/view/users/join2";
+        result.put("duple",false);
+        return result;
     }
 
     // 손봐야 함
