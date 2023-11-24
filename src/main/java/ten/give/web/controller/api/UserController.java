@@ -115,7 +115,7 @@ public class UserController {
     @ApiResponses({
             @ApiResponse(code=200, message="성공"),
     })
-    @PostMapping("/withdrawal")
+    @DeleteMapping
     public ResultForm withdrawal(Authentication authentication){
         return userService.withdrawal(Long.valueOf(authentication.getName()));
     }
@@ -140,7 +140,7 @@ public class UserController {
     @ApiResponses({
             @ApiResponse(code=200, message="성공"),
     })
-    @GetMapping("/info")
+    @GetMapping
     public UserInfoForm showUserInfo(Authentication authentication){
 
         Optional<User> userByEmail = userService.getuserByAccountId(Long.valueOf(authentication.getName()));
@@ -187,7 +187,7 @@ public class UserController {
     @ApiResponses({
             @ApiResponse(code=200, message="성공"),
     })
-    @PostMapping("/edit")
+    @PatchMapping
     public UserInfoForm editUserInfo(Authentication authentication, @RequestBody UserInfoForm updateParam){
 
         Long userId = Long.valueOf(authentication.getName());
