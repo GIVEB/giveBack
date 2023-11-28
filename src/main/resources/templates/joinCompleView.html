@@ -212,7 +212,7 @@
                     </div>
 
                     <div id="btn-container">
-                        <button type="button" onclick="location.href='/view/users/login'" id="loginBtn">로그인</button>
+                        <button type="button" onclick="location.href='login'" id="loginBtn">로그인</button>
                     </div>
                 </div>
 
@@ -251,7 +251,7 @@
 
         if (time <= 0) {
             clearInterval(timer);
-            location.replace('http://localhost:8080/view/users/login');
+            location.href ='login';
         }
     }, 1000);
 </script>
