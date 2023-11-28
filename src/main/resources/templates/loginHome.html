@@ -45,7 +45,7 @@
                                onclick="moveCardList()">헌혈증 목록 보기</a></p>
 
                         <p class="text-muted mb-4">Test<span class="mx-2">|</span> <a
-                                href="http://localhost:8080/view/donorcards/addDonorcard">헌혈증 등록</a></p>
+                                href="addForm_design.html">헌혈증 등록</a></p>
 
                         <button type="button" class="btn btn-primary btn-rounded btn-lg" onclick="location.href ='http://www.givedonorcards.com/swagger-ui/index.html#/'">
                             API SPEC Documentation
@@ -65,8 +65,8 @@
 
     const $welcomeTxt = document.getElementById('welcomeTxt');
 
-    window.addEventListener('DOMContentLoaded',() => {
-        fetch("http://localhost:8080/api/users/info",{
+    window.addEventListener('DOMContentLoaded', () => {
+        fetch("http://localhost:8080/api/users",{
             method: 'get',
             headers: {
                 'content-type': 'application/json',
@@ -74,7 +74,7 @@
             }
         }).then(res => res.json())
             .then(json => {
-                console.log(json.name);
+                //console.log(json.name);
                 $welcomeTxt.innerText = json.name + '님 반갑습니다!';
             })
 
