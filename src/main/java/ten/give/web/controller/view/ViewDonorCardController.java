@@ -57,9 +57,9 @@ public class ViewDonorCardController {
     @GetMapping("/addDonorcard")
     public String addForm(Authentication authentication,@ModelAttribute DonorAddForm form) {
 
-        /*if (authentication.getName() == null){
-            return "redirect:/";
-        }*/
+        if (authentication.getName() == null){
+            return "home";
+        }
 
         return "addDonorcardForm";
     }
