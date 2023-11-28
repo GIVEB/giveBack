@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link href="reqRedBox.css" rel="stylesheet">
+  <meta charset="utf-8">
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+  <style>
+    input::-webkit-input-placeholder {
+      font-weight: bold;
+      text-align: center;
+    }
+  </style>
+
+</head>
+
+<body>
+  <!-- Header -->
+  <div style="height: 150px;">
+    <img src="img/logo.png" width="80" height="80" style="margin-left: 40px; margin-top: 30px;">
+    <img src="img/title.png" width="100" height="50" style="margin-left: 10px; margin-top: 50px;">
+    <img src="img/profile.png" width="60" height="60" style="float: right; margin-right: 40px; margin-top: 40px;">
+    <!-- profile 클릭 시, 마이페이지-->
+  </div>
+
+  <section>
+    <!-- bubble -->
+    <canvas id="bubbleDeco"></canvas>
+    <div class="sec_frame">
+      <!-- 이미지 -->
+      <div class="sec_image">
+        <div class="add_image">
+          <img src="img/reqRedBox_img.png" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+      </div>
+      <!-- reqForm -->
+      <div class="sec_req">
+        <form class="req_section">
+          <div class="reqForm"></div>
+          <div class="reqTitle">
+            <p style="font-size: 120%; font-weight: bold;"><br>헌혈증 요청</p>
+          </div>
+          <div class="reqName"><label for="name" class="form-label">환자이름:</label></div>
+          <div class="reqNameInput"><input class="underline" type="text" class="form-control" id="name"></div>
+          <div class="reqBirth"><label for="birth" class="form-label">생년월일:</label></div>
+          <div class="reqBirthInput">
+            <input style="width: 32%;" placeholder="년" class="underline" type="text" class="form-control"
+              id="birth_year">
+            <input style="width: 32%;" placeholder="월" class="underline" type="text" class="form-control"
+              id="birth_month">
+            <input style="width: 32%;" placeholder="일" class="underline" type="text" class="form-control"
+              id="birth_day">
+          </div>
+          <div class="reqGender"><label style="margin-left: 27.5%;" for="gender"
+              class="form-label">성&nbsp&nbsp&nbsp&nbsp&nbsp별:</label></div>
+          <div class="reqGenderInput">
+            <div class="select">
+              <input type="radio" name="gender" id="male" value="M" checked>
+              <label for="male"> 남 </label>
+            </div>
+            <div style="margin-left: 2%;" class="select">
+              <input type="radio" name="gender" id="female" value="F">
+              <label for="female"> 여 </label>
+            </div>
+          </div>
+          <div class="reqHospital"><label style="margin-left: 28%;" for="place" class="form-label">병 원 명:</label></div>
+          <div class="reqHospitalInput"><input class="underline" type="text" class="form-control" id="place"></div>
+          <div class="reqDoc"><label for="files[]" class="form-label">첨부파일:</label></div>
+          <div class="reqDocInput">
+            <input style="width: 100%; height: 100%;" class="upload-name" value="첨부파일">
+          </div>
+          <div class="reqInputbtn">
+            <label style="font-size: 15px; margin: 0;" for="file">첨부</label>
+            <input type="file" id="file">
+          </div>
+          <input class="reqBtn" type="submit" value="요청">
+        </form>
+      </div>
+    </div>
+
+
+  </section>
+
+  <!-- footer -->
+  <footer class="container-fluid">
+    <h3 style="padding:10px;">기브</h3>
+    <div class="row">
+      <div class="col-3"></div>
+      <div class="col-2"><button class="customer-center-btn">헌혈의 집 찾기</button></div>
+      <div class="col-2"><button class="customer-center-btn">고객센터</button></div>
+      <div class="col-2"><button class="customer-center-btn">레드커넥트</button></div>
+      <div class="col-3"></div>
+    </div>
+    <div class="row">
+      <div class="col-3"></div>
+      <div class="col-9" style="text-align:left;">
+        <p class="source_text">[26465]강원특별자치도 원주시 혁신로 50 대한적십자사 혈액관리본부</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-3"></div>
+      <div class="col-9" style="text-align:left;">
+        <p class="source_text">COPYRIGHT(C) GIVE ALL RIGHTS RESERVED.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    var b = document.getElementById("bubbleDeco");
+    var bubble = b.getContext("2d");
+    b.width = window.innerWidth;
+    b.height = window.innerHeight;
+
+    //left side bubble
+    bubble.beginPath();
+    bubble.arc(0, 250, 100, 0, Math.PI * 2);
+    bubble.fillStyle = "rgba(254,0,0,0.3)";
+    bubble.fill();
+
+    bubble.beginPath();
+    bubble.arc(88, 350, 15, 0, Math.PI * 2);
+    bubble.fillStyle = "rgba(255,77,77,0.6)";
+    bubble.fill();
+
+    bubble.beginPath();
+    bubble.arc(60, 380, 8, 0, Math.PI * 2);
+    bubble.fillStyle = "rgba(255,77,77,0.4)";
+    bubble.fill();
+
+    //right side bubble
+    bubble.beginPath();
+    bubble.arc(b.width, 470, 100, 0, Math.PI * 2);
+    bubble.fillStyle = "rgba(255,77,77,0.4))";
+    bubble.fill();
+
+    bubble.beginPath();
+    bubble.arc(b.width - 88, 350, 15, 0, Math.PI * 2);
+    bubble.fillStyle = "rgba(255,77,77,0.6)";
+    bubble.fill();
+
+    bubble.beginPath();
+    bubble.arc(b.width - 60, 330, 8, 0, Math.PI * 2);
+    bubble.fillStyle = "rgba(255,77,77,0.4)";
+    bubble.fill();
+  </script>
+
+  <script>
+    $("#file").on('change', function () {
+      var fileName = $("#file").val();
+      $(".upload-name").val(fileName);
+    });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="reqRedBox_List.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Header -->
+    <div style="height: 150px;">
+        <img src="img/logo.png" width="80" height="80" style="margin-left: 40px; margin-top: 30px;">
+        <img src="img/title.png" width="100" height="50" style="margin-left: 10px; margin-top: 50px;">
+        <img src="img/profile.png" width="60" height="60" style="float: right; margin-right: 40px; margin-top: 40px;">
+        <!-- profile 클릭 시, 마이페이지-->
+    </div>
+
+    <section>
+        <div class="circleLeft"></div>
+        <div class="circleLeftS"></div>
+        <div class="circleLeftM"></div>
+        <div class="circleLeftL"></div>
+        <div class="circleRight"></div>
+        <div class="circleRightS"></div>
+        <div class="circleRightM"></div>
+
+        <div class="sec_frame">
+            <div style="font-size: 150%; font-weight: bold; height: 10%;">헌혈증 요청 목록</div>
+
+            <!-- 요청 -->
+            <div class="box">
+                <div class="name">이름 : 신영운</div>
+                <div class="type">혈액형 : O</div>
+                <div class="state">승인 - 레드박스 요청 중</div>
+                <div class="img"><img src="img/request.png" style="width: 8vh; height: 8vh; object-fit: cover;"></div>
+            </div>
+            <!-- 거절 -->
+            <div class="box">
+                <div class="name">이름 : 신영운</div>
+                <div class="type">혈액형 : O</div>
+                <div class="state">반려 : 요청 자료 불충분</div>
+                <div class="img"><img src="img/reject.png" style="width: 8vh; height: 8vh; object-fit: cover;"></div>
+            </div>
+            <!-- 승인 -->
+            <div class="box">
+                <div class="name">이름 : 신영운</div>
+                <div class="type">혈액형 : O</div>
+                <div class="state">승인 : 레드박스 발급 완료</div>
+                <div class="img"><img src="img/accept.png" style="width: 8vh; height: 8vh; object-fit: cover;"></div>
+            </div>
+            <!-- End -->
+        </div>
+    </section>
+
+    <!-- footer -->
+    <footer class="container-fluid">
+        <h3 style="padding:10px;">기브</h3>
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col-2"><button class="customer-center-btn">헌혈의 집 찾기</button></div>
+            <div class="col-2"><button class="customer-center-btn">고객센터</button></div>
+            <div class="col-2"><button class="customer-center-btn">레드커넥트</button></div>
+            <div class="col-3"></div>
+        </div>
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col-9" style="text-align:left;">
+                <p class="source_text">[26465]강원특별자치도 원주시 혁신로 50 대한적십자사 혈액관리본부</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col-9" style="text-align:left;">
+                <p class="source_text">COPYRIGHT(C) GIVE ALL RIGHTS RESERVED.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<link href="./styles/StyleForm.css" rel="stylesheet">
+<link href="./styles/RadioButton.css" rel="stylesheet">
+<title>헌혈증 등록</title>
+<style>
+    body {
+        width: 100%;
+        overflow-x: hidden;
+        padding: 0;
+        margin: 0;
+    }
+
+    .Logo {
+        margin-top: 30px;
+    }
+
+    .circleLeft {
+        background-color: #FE0000;
+        opacity: 30%;
+        position: absolute;
+        width: 150px;
+        height: 200px;
+        border-radius: 0 150px 150px 0;
+        top: 30%;
+        transform: translate(-50%, -50%);
+    }
+
+    .circleRight {
+        background-color: #FF4747;
+        opacity: 70%;
+        position: absolute;
+        width: 200px;
+        height: 350px;
+        border-radius: 200px 0 0 200px;
+        top: 70%;
+        left: 95%;
+        transform: translate(-50%, -50%);
+    }
+
+    input {
+        border: none;
+        font-size: 12px;
+        text-align: left;
+    }
+
+    section {
+        position: relative;
+        height: 980px;
+    }
+
+    div.header {
+        position: relative;
+        height: 140px;
+    }
+
+    .form_font {
+        text-align: center;
+        font-size: 17px;
+        font-weight: bold;
+        color: black;
+    }
+
+    .menufont {
+        text-decoration-line: none;
+        font-size: 17px;
+        font-weight: bold;
+        color: black;
+        min-width: 100px;
+        text-align: center;
+        float: right;
+    }
+
+    .dor_frame {
+        background-color: #ffd200;
+        position: absolute;
+        width: 630px;
+        height: 400px;
+        top: 460px;
+        left: 920px;
+        transform: translate(-50%, -50%);
+        border-radius: 25px;
+    }
+
+    .dor_wrap {
+        position: absolute;
+        background-color: white;
+        height: 40px;
+        width: 310px;
+        top: 305px;
+        left: 1050px;
+        transform: translate(-50%, -50%);
+        border-radius: 10px;
+    }
+
+    .dor_num {
+        text-align: center;
+        font-size: 14px;
+        font-weight: bold;
+        line-height: 92%;
+        margin-left: 10%;
+    }
+
+    .dor_form {
+        background-color: white;
+        position: absolute;
+        width: 610px;
+        height: 320px;
+        top: 490px;
+        left: 920px;
+        transform: translate(-50%, -50%);
+        border-bottom-left-radius: 25px;
+        border-bottom-right-radius: 25px;
+    }
+
+    .underline {
+        border-bottom: 1px solid;
+    }
+
+    input:focus {
+        outline: none;
+    }
+</style>
+
+<body>
+<section>
+    <div class="header">
+        <div class="row align-items-center">
+            <div class="col-7 ms-5">
+                <svg class="Logo" width="55" height="52.56" viewBox="0 0 60 58" fill="none"
+                     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <rect width="60" height="57.3333" fill="url(#pattern0)"/>
+                    <defs>
+                        <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+                            <use xlink:href="#image0_3560_188"
+                                 transform="matrix(0.00530864 0 0 0.00555556 -0.0149383 0)"/>
+                        </pattern>
+                        <image id="image0_3560_188" width="194" height="180"
+                               xlink:href="data:image/png;base64,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"/>
+                    </defs>
+                </svg>
+            </div>
+            <div class="col-4">
+                <a class="col-1 menufont" href="Event.html">이벤트</a>
+                <a class="col-1 menufont" href="InQuiry.html">문의</a>
+                <a class="col-2 menufont" href="ViewMyAccount.html">마이페이지</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="circleLeft"></div>
+    <div class="circleRight"></div>
+
+    <div class="row my-5">
+        <div class="col-3"></div>
+        <div class="col-5 fs-4 text-center"> 헌혈증 등록</div>
+    </div>
+
+    <div class="row-cols-1">
+        <div class="col">
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col ms-5">
+                    <img src="./img/addForm_img.png" alt="#" width="380" height="380">
+                </div>
+            </div>
+        </div>
+
+        <form class="addDonor_section" name="add-form" method="post" action="#">
+            <!-- 헌혈증 절대 위치로 생성 -->
+            <div class="dor_frame">
+                <div class="row">
+                    <div style="font-size: 25px; font-weight: bold;" class="col-4 text-center mt-3"> 헌혈증서</div>
+                </div>
+            </div>
+
+            <div class="dor_wrap">
+                <div class="row">
+                    <div class="col-3 row-cols-1">
+                        <div class="col dor_num mt-2">증서</div>
+                        <div class="col dor_num">번호</div>
+                    </div>
+                    <div class="col-8 row">
+                        <input class="col-12 mt-1 underline" type="text" class="form-control" id="card_id">
+                    </div>
+                </div>
+            </div>
+
+            <!--input-->
+            <div class="dor_form">
+                <div class="row mb-3 mt-3">
+                    <div class="col-5 ms-3">
+                        <div class="row mt-3">
+                            <label class="col-5 form_font" for="name"
+                                   class="form-label">성&nbsp&nbsp&nbsp&nbsp&nbsp명:</label>
+                            <input class="col-7 underline" type="text" class="form-control" id="name">
+                        </div>
+                        <div style="margin-top: 38px;" class="row">
+                            <label class="col-5 form_font" for="birth" class="form-label">생년월일:</label>
+                            <div class="col-7 underline">
+                                <div class="row justify-content-center">
+                                    <input class="col-4" type="text" class="form-control" id="birth">
+                                    -
+                                    <input class="col-3" type="text" class="form-control" id="birth">
+                                    -
+                                    <input class="col-3" type="text" class="form-control" id="birth">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="row ms-1">
+                            <div class="col-4 mt-3 form_font">헌혈종류:</div>
+                            <div class="col-7 row">
+                                <div class="col-4 select mb-2 me-2">
+                                    <input style="display: checked;" type="radio" id="inlineCheckbox1" name="kind"
+                                           value="option1" checked>
+                                    <label for="inlineCheckbox1">전혈</label>
+                                </div>
+                                <div class="col-6 select2 mb-2">
+                                    <input type="radio" id="inlineCheckbox2" name="kind" value="option2">
+                                    <label for="inlineCheckbox2">혈소판</label>
+                                </div>
+
+                                <div class="col-4 select me-2">
+                                    <input type="radio" id="inlineCheckbox3" name="kind" value="option3">
+                                    <label for="inlineCheckbox3">혈장</label>
+                                </div>
+                                <div class="col-6 select4">
+                                    <input type="radio" id="inlineCheckbox4" name="kind" value="option4">
+                                    <label for="inlineCheckbox4">혈소판혈장</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3 ms-1">
+                            <div class="col-4 form_font px-1">성&nbsp&nbsp&nbsp&nbsp&nbsp별:</div>
+                            <div class=" col-2 select me-2">
+                                <input type="radio" name="gender" id="male" value="m" checked>
+                                <label for="male"> 남 </label>
+                            </div>
+                            <div class="col-2 select">
+                                <input type="radio" name="gender" id="female" value="f">
+                                <label for="female"> 여 </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="text-align: left;" class="ms-5 mt-4 mb-2 form_font">
+                        <p>사랑의 헌혈에 동참하여 생명 나눔을 몸소 실천한 귀하에게<br> 깊은 존경과 감사의 마음을 담아 이 증서를 드립니다.</p>
+                    </div>
+
+                    <div class="row ms-0">
+                        <div class="col-6 row">
+                            <label class="col-5 form_font" for="donordate" class="form-label">헌혈일자:</label>
+                            <div class="col-7 underline">
+                                <div class="row justify-content-center">
+                                    <input class="col-4" type="text" class="form-control" id="donordate">
+                                    -
+                                    <input class="col-3" type="text" class="form-control" id="donordate">
+                                    -
+                                    <input class="col-3" type="text" class="form-control" id="donordate">
+                                </div>
+                            </div>
+                        </div>
+                        <div style="margin-top: 16px; margin-left: -2px;" class="row">
+                            <label class="col-2 form_font" for="donorcenter" class="form-label">혈액원명:</label>
+                            <input class="col-5 ms-2 underline" type="text" class="form-control" id="donorcenter">
+                            <div style="font-size: 19px; font-weight: bold; text-align: right;" class="col-4">보건복지부장관
+                            </div>
+                        </div>
+                    </div>
+                    <button style="font-size: 25px; margin-left: 1%;" class="mt-5 transparent-bg-btn">제출</button>
+                </div>
+        </form>
+</section>
+
+
+<footer class="container-fluid footer">
+    <h4 style="padding:10px;">GIVE</h4>
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-2">
+            <button class="customer-center-btn">헌혈의 집 찾기</button>
+        </div>
+        <div class="col-2">
+            <button class="customer-center-btn">고객센터</button>
+        </div>
+        <div class="col-2">
+            <button class="customer-center-btn">레드커넥트</button>
+        </div>
+        <div class="col-3"></div>
+    </div>
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-9" style="text-align:left;"><p class="source_text">[26465]강원특별자치도 원주시 혁신로 50 대한적십자사 혈액관리본부</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-9" style="text-align:left;"><p class="source_text">COPYRIGHT(C) GIVE ALL RIGHTS RESERVED.</p>
+        </div>
+    </div>
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
