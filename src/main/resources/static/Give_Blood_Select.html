@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Donation Card</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="./styles/StyleForm.css" rel="stylesheet">
+
+  <style>
+  
+    .donor-section {
+      width: 100%;
+      height: 750px;
+    }
+
+    .box-wrapper {
+      height: 90%;
+    }
+
+    .selector {
+      width: 80%;
+      height: 80%;
+    }
+
+    .icon {
+      width: 100%;
+      height: 90%;
+      text-align: center;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .icon>div {
+      width: 90%;
+      height: 90%;
+      border-radius: 50%;
+      background-color: rgb(207, 204, 204);
+      text-align: center;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: gray;
+    }
+
+    .icon>div>img {
+      width: 250px;
+      height: 250px;
+    }
+
+    .desc {
+      width: 100%;
+      height: 10%;
+      text-align: center;
+      font-size: 30px;
+    }
+
+    #userDonationModal {
+      position: fixed;
+      top: 45%;
+      left: 50%;
+      width: 800px;
+      height: 550px;
+      background-color: white;
+      transform: translate(-50%, -50%);
+      transition: 1s;
+      border-radius:20px;
+    }
+
+    #redboxDonationModal {
+      position: fixed;
+      top: 45%;
+      left: 50%;
+      width: 400px;
+      height: 500px;
+      background-color:  white;
+      transform: translate(-50%, -50%);
+      transition: 1s;
+      border-radius:20px;
+    }
+
+    #redboxWrapper{
+      position: relative;
+      color: #E60012;
+    }
+
+    #redboxWrapper h1{
+      position: absolute;
+      top: 65%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+    }
+
+    .donation-modal-btn {
+      background-color: none;
+    }
+
+    #bubbleDeco {
+      position: fixed;
+      position:absolute;
+      z-index:-1;
+      top:45%;
+      left:50%;
+      transform: translate(-50%, -50%);
+      transition: 1s;
+      border-radius:20px;
+    }
+
+    #bubbleDeco2 {
+      position: fixed;
+      position:absolute;
+      z-index:-1;
+      top:45%;
+      left:50%;
+      transform: translate(-50%, -50%);
+      transition: 1s;
+      border-radius:20px;
+    }
+
+    #user_data {
+      border: 1px solid rgba(229, 229, 229, 0.875);
+      margin-top:30px;
+      margin-bottom:20px;
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <div class="header">
+    <div class="row align-items-center">
+      <div class="col-7 ms-5">
+          <img src="img/Main_title.png" alt="#" width="140" height="140">
+      </div>
+      <div class="col-4">
+        <a class="col-1 menufont" href="Event.html">이벤트</a> 
+        <a class="col-1 menufont" href="InQuiry.html">문의</a>
+        <a class="col-2 menufont" href="ViewMyAccount.html">마이페이지</a>        
+      </div>            
+    </div>
+  </div>
+
+  <div class="container">
+    <section class="donor-section">
+
+      <div class="row box-wrapper">
+        <div class="btn col-6 d-flex align-items-center justify-content-center" onclick="showUserDonationModal()">
+          <div class="row selector">
+            <div class="col-12 icon">
+              <div class=""><svg xmlns="http://www.w3.org/2000/svg" width="250" height="250" fill="currentColor"
+                  class="bi bi-person-fill" viewBox="0 0 16 16">
+                  <path style="fill:#FF4D4D;" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
+                </svg></div>
+            </div>
+            <div class="col-12 desc">개인</div>
+          </div>
+        </div>
+        <div class="btn col-6 d-flex align-items-center justify-content-center" onclick="showRedboxDonationModal()">
+          <div class="row selector">
+            <div class="col-12 icon">
+              <div><img src="img/redbox.png" alt="#"></div>
+            </div>
+            <div class="col-12 desc">레드박스</div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+  </div>
+
+  <footer>
+    <h3 style="padding:10px;">기브</h3>
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-2"><button class="customer-center-btn">헌혈의 집 찾기</button></div>
+        <div class="col-2"><button class="customer-center-btn">고객센터</button></div>                
+        <div class="col-2"><button class="customer-center-btn">레드커넥트</button></div>
+        <div class="col-3"></div>
+    </div>
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-9" style="text-align:left;"><p class="source_text">[26465]강원특별자치도 원주시 혁신로 50 대한적십자사 혈액관리본부</p></div>
+    </div>
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-9" style="text-align:left;"><p class="source_text">COPYRIGHT(C) GIVE ALL RIGHTS RESERVED.</p></div>
+    </div>
+  </footer>
+
+  <!-- user Donation modal -->
+  <div id="userDonationModalContainer" class="modal_container d-none">
+    <div id="userDonationModal" class="d-none">
+      <canvas id="bubbleDeco" width="800" height="550"></canvas>
+      <script>
+        var c = document.getElementById("bubbleDeco");
+        var bubble = c.getContext("2d");
+
+        //left side bubble
+        bubble.beginPath();
+        bubble.arc(0,150,70,0,Math.PI*2);
+        bubble.fillStyle="rgba(255,77,77,0.7)";
+        bubble.fill();
+
+        bubble.beginPath();
+        bubble.arc(50,80,10,0,Math.PI*2);
+        bubble.fillStyle="rgba(254, 0, 0, 0.5)";
+        bubble.fill();
+
+        bubble.beginPath();
+        bubble.arc(70,90,7,0,Math.PI*2);
+        bubble.fillStyle="rgba(255, 77, 77, 0.5)";
+        bubble.fill();
+
+        bubble.beginPath();
+        bubble.arc(67,105,4,0,Math.PI*2);
+        bubble.fillStyle="rgba(254, 0, 0, 0.3)";
+        bubble.fill();
+        
+      </script>
+
+      
+      <div class="container">
+        <div class="row" style="margin-top:80px;">
+          <div class="col-5">
+            <div style="margin-top:30px;"><img src="img/red_box_User.png" alt="#" width="250" height="300"></div>
+          </div>
+          <div class="col-7">
+            <div><h2>대상자 정보 입력</h2></div>
+            <form id="user_data">
+
+              <div class="row follower">
+                <div class="col-1" style="margin-top:10px; margin-left:20px;"><img src="img/following.png" alt="#" width="55" height="55">
+                  
+                </div>
+                <div class="col-4">
+                  <label style="margin-top:20px;">신영운</label>
+                </div>
+              </div>
+
+              <div class="row follower">
+                <div class="col-1" style="margin-top:10px; margin-left:20px;"><img src="img/following.png" alt="#" width="55" height="55">
+                  
+                </div>
+                <div class="col-4">
+                  <label style="margin-top:20px;">양지웅</label>
+                </div>
+              </div>
+
+              <div class="row follower">
+                <div class="col-1" style="margin-top:10px; margin-left:20px;"><img src="img/following.png" alt="#" width="55" height="55">
+                  
+                </div>
+                <div class="col-4">
+                  <label style="margin-top:20px;">남태현</label>
+                </div>
+              </div>
+
+              <div class="row follower" style="margin-bottom:20px;">
+                <div class="col-1" style="margin-top:10px; margin-left:20px;"><img src="img/following.png" alt="#" width="55" height="55">
+                  
+                </div>
+                <div class="col-4">
+                  <label style="margin-top:20px;">양영환</label>
+                </div>
+              </div>
+              <!-- <div class="row mb-5 mt-3">
+                <label for="inputName" class="col-sm-3 col-form-label ">성명</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control input-underline" id="inputName">
+                </div>
+              </div>
+              <div class="row mb-5">
+                <label for="inputBirth" class="col-sm-3 col-form-label">생년월일</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control input-underline" id="inputBirth">
+                </div>
+              </div>
+              <fieldset class="row mb-5">
+                <legend class="col-form-label col-sm-3 pt-0">성 별</legend>
+                <div class="col-sm-9">
+                  <div class="ms-2 row">
+                    <div class="form-check col-3">
+                      <input class="form-check-input" type="radio" name="gridRadios" id="inputMale" value="m" checked>
+                      <label class="form-check-label" for="inputMale">
+                        남자
+                      </label>
+                    </div>
+                    <div class="form-check col-3">
+                      <input class="form-check-input" type="radio" name="gridRadios" id="inputFemale" value="f">
+                      <label class="form-check-label" for="inputFemale">
+                        여자
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+              <div class="row mb-5">
+                <label for="inputPhone" class="col-sm-3 col-form-label">전화번호</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control input-underline" id="inputPhone">
+                </div> 
+              </div> -->
+
+            </form>
+            
+            
+          </div>
+        </div>
+        <hr>
+        <div class="row mb-5 ms-2 me-2">
+          <button type="button" class="col-6 btn dontaion-modal-btn" onclick="hideUserDonationModal()"><h3>취소</h3></button>
+          <button type="submit" class="col-6 btn donation-modal-btn" onclick="location.href='Give_Blood_design.html'"><h3>기부</h3></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- red box donatin modal -->
+  <div id="redDonationModalContainer" class="modal_container d-none">
+    <div id="redboxDonationModal" class="d-none">
+      <!-- <div class="btn float-end" onclick="hideRedboxDonationModal()"><svg xmlns="http://www.w3.org/2000/svg" width="30"
+          height="30" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+          <path
+            d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
+        </svg></div> -->
+        <canvas id="bubbleDeco2" width="400" height="500"></canvas>
+        <script>
+          var d = document.getElementById("bubbleDeco2");
+          var bubble2 = d.getContext("2d");
+
+          //left side bubble
+          bubble2.beginPath();
+          bubble2.arc(0,370,30,0,Math.PI*2);
+          bubble2.fillStyle="rgba(255, 77, 77, 1)";
+          bubble2.fill();
+
+          bubble2.beginPath();
+          bubble2.arc(35,345,7,0,Math.PI*2);
+          bubble2.fillStyle="rgba(255, 77, 77, 0.85)";
+          bubble2.fill();
+
+          bubble2.beginPath();
+          bubble2.arc(22,332,5,0,Math.PI*2);
+          bubble2.fillStyle="rgba(254, 0, 0, 0.3)";
+          bubble2.fill();
+  
+          //right side bubble
+          bubble2.beginPath();
+          bubble2.arc(400,180,70,0,Math.PI*2);
+          bubble2.fillStyle="rgba(255, 77, 77, 0.85)";
+          bubble2.fill();
+
+          bubble2.beginPath();
+          bubble2.arc(340,110,12,0,Math.PI*2);
+          bubble2.fillStyle="rgba(254, 0, 0, 0.5)";
+          bubble2.fill(); 
+
+          bubble2.beginPath();
+          bubble2.arc(370,105,7,0,Math.PI*2);
+          bubble2.fillStyle="rgba(255, 77, 77, 0.5)";
+          bubble2.fill(); 
+
+          bubble2.beginPath();
+          bubble2.arc(355,90,5,0,Math.PI*2);
+          bubble2.fillStyle="rgba(254, 0, 0, 0.3)";
+          bubble2.fill(); 
+        </script>
+        
+      <div class="text-center mt-5">
+        <h1>기부 개수</h1>
+      </div>
+
+      <div class="container">
+        <div class="row">
+          
+            <div id="redboxWrapper" class="col text-center mt-4 mb-4" style="margin:0;">
+              <div style="margin-top:30px;"><img src="img/Blood.png" alt="#" width="120" height="220"></div>
+              <h1 class="text-white"> 2개 </h1>
+            </div>
+          
+        </div>
+      </div>
+      <hr>
+      <div class="container">
+        <div class="row mb-5 ms-2 me-2">
+          <button type="button" class="col-6 btn dontaion-modal-btn" onclick="hideRedboxDonationModal()"><h3>취소</h3></button>
+          <button type="submit" class="col-6 btn donation-modal-btn" onclick="location.href='Give_Blood_Redbox.html'"><h3>기부</h3></button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+
+  <script>
+    const $userDonaModal = document.querySelector('#userDonationModal');
+    const $redboxDonaModal = document.querySelector('#redboxDonationModal');
+    const $redDonationContainer = document.querySelector('#redDonationModalContainer');
+    const $userDonationModalContainer = document.querySelector('#userDonationModalContainer');
+
+    function showUserDonationModal() {
+      $userDonaModal.classList.remove('d-none');
+      $userDonationModalContainer.classList.remove('d-none');
+    }
+
+    function hideUserDonationModal() {
+      $userDonaModal.classList.add('d-none');
+      $userDonationModalContainer.classList.add('d-none');
+    }
+
+    function showRedboxDonationModal() {
+      $redboxDonaModal.classList.remove('d-none');
+      $redDonationContainer.classList.remove('d-none');
+    }
+
+    function hideRedboxDonationModal() {
+      $redboxDonaModal.classList.add('d-none');
+      $redDonationContainer.classList.add('d-none');
+    }
+
+  </script>
+
+</body>
+
+</html>
