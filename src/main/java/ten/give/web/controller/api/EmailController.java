@@ -36,7 +36,6 @@ public class EmailController {
     @PostMapping("/sendemail")
     public EmailResultForm sendEmail(@RequestBody SendEmailForm form){
         return emailService.sendEmail(form.getToEmail());
-
     }
 
 

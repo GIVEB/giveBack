@@ -35,7 +35,7 @@ public class GiveController {
             @ApiResponse(code=200, message="성공")
     })
     @PostMapping
-    public Map<String, List<DonorCardInfoForm>> getList(@RequestBody DonationForm form, Authentication authentication){
+    public Map<String, List<DonorCardInfoForm>> DonationCard(@RequestBody DonationForm form, Authentication authentication){
 
         Map<String, List<DonorCardInfoForm>> result = new HashMap<>();
 
